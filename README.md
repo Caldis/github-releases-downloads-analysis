@@ -4,7 +4,7 @@
 http://gra.u2sk.com
 
 ## Features | 功能
-- Statistics of your repo releases downloads count
+- Analysis of your repo releases downloads count
 - 统计 Github Releases 的各个版本的下载次数
 
 ## Tips | 小技巧
