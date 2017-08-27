@@ -18,16 +18,16 @@ const config =  merge.smart(baseConfig, {
 		}),
 		// 代码压缩
 		new webpack.optimize.UglifyJsPlugin({
-			sourceMap: false,
-            comments: false,
-			compress: {
-				warnings: false
-			}
+			// sourceMap: false,
+            // comments: false,
+			// compress: {
+			// 	warnings: false
+			// }
 		}),
 		// Loader压缩
-		new webpack.LoaderOptionsPlugin({
-			minimize: true
-		})
+		// new webpack.LoaderOptionsPlugin({
+		// 	minimize: true
+		// })
 	]
 })
 
