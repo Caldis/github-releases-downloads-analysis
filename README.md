@@ -9,7 +9,7 @@ http://gra.u2sk.com
 
 ## Tips | 小技巧
 - You can directly specify the url of repo's to query just like below.
-- 你可以直接在域名后跟上对应的 repo 链接来快速查询, 可以看下面
+- 你可以直接在域名后跟上对应的 repo 链接来快速查询, 例如下面这样:
 - http://gra.u2sk.com/?url=https://github.com/Caldis/Mos
 - http://gra.u2sk.com/?url=https://github.com/shadowsocks/shadowsocks-windows
 - http://gra.u2sk.com/?url=https://github.com/facebook/react
