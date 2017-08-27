@@ -8,7 +8,7 @@ import React from 'react'
 import './app.global.less'
 import style from './app.less'
 // AntMotion
-import QueueAnim from 'rc-queue-anim';
+import QueueAnim from 'rc-queue-anim'
 // History
 import createHistory from 'history/createBrowserHistory'
 const history = createHistory()
@@ -24,6 +24,7 @@ import Tags from './components/tags'
 import BarChart from './components/chart/bar'
 import PieChart from './components/chart/pie'
 import Horizontal from './components/horizonal'
+import Github from './components/github'
 // Utils
 import { disableDragDrop } from './utils/tools'
 // Config
@@ -146,6 +147,11 @@ class App extends React.Component {
         return (
             <div className={style.app}>
 
+                {/*项目链接*/}
+                <div className={style.floatButton}>
+                    <Github/>
+                </div>
+
                 {/*落地题图*/}
                 <QueueAnim className={style.bannerContainer} type="bottom" duration={[350, 0]}>
                     {
@@ -234,6 +240,12 @@ class App extends React.Component {
                                 </div>
                                 <div className={style.cardOverlayLeft}/>
                                 <div className={style.cardOverlayRight}/>
+                            </div>
+
+                            {/*页脚*/}
+                            <div className={style.footer}>
+                                <p>Designed & Made by Caldis, Power by React</p>
+                                <Github/>
                             </div>
                         </div>
                     }
