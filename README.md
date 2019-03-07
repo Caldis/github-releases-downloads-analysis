@@ -1,7 +1,7 @@
 # Github Releases Download Analysis | Github Releases 下载次数统计工具
 
 ## Homepage | 主页
-http://gra.u2sk.com
+http://gra.caldis.me
 
 ## Features | 功能
 - Analysis of your repo releases downloads count
@@ -10,11 +10,11 @@ http://gra.u2sk.com
 ## Tips | 小技巧
 - You can directly specify the url of repo's to query just like below.
 - 你可以直接在域名后跟上对应的 repo 链接来快速查询, 例如下面这样:
-- http://gra.u2sk.com/?url=https://github.com/Caldis/Mos
-- http://gra.u2sk.com/?url=https://github.com/shadowsocks/shadowsocks-windows
-- http://gra.u2sk.com/?url=https://github.com/facebook/react
-- http://gra.u2sk.com/?url=https://github.com/lhc70000/iina
-- http://gra.u2sk.com/?url=https://github.com/electron/electron
+- http://gra.caldis.me/?url=https://github.com/Caldis/Mos
+- http://gra.caldis.me/?url=https://github.com/shadowsocks/shadowsocks-windows
+- http://gra.caldis.me/?url=https://github.com/facebook/react
+- http://gra.caldis.me?url=https://github.com/lhc70000/iina
+- http://gra.caldis.me/?url=https://github.com/electron/electron
 
 ## Limits | 限制
 - Because the limition of github's api, the download count of file Source code (zip) and Source code (tar.gz) in releases will not contain in result
