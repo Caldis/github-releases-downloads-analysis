@@ -1,21 +1,70 @@
-# Github Releases Download Analysis | Github Releases 下载次数统计工具
+# Getting Started with Create React App
 
-## Homepage | 主页
-http://gra.caldis.me
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Features | 功能
-- Analysis of your repo releases downloads count
-- 统计 Github Releases 的各个版本的下载次数
+## Available Scripts
 
-## Tips | 小技巧
-- You can directly specify the url of repo's to query just like below.
-- 你可以直接在域名后跟上对应的 repo 链接来快速查询, 例如下面这样:
-- http://gra.caldis.me/?url=https://github.com/Caldis/Mos
-- http://gra.caldis.me/?url=https://github.com/shadowsocks/shadowsocks-windows
-- http://gra.caldis.me/?url=https://github.com/facebook/react
-- http://gra.caldis.me?url=https://github.com/lhc70000/iina
-- http://gra.caldis.me/?url=https://github.com/electron/electron
+In the project directory, you can run:
 
-## Limits | 限制
-- Because the limition of github's api, the download count of file Source code (zip) and Source code (tar.gz) in releases will not contain in result
-- 由于Github接口的限制, Releases 中的 Source code (zip) 与 Source code (tar.gz) 的下载量是不计入的
+### `yarn start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
+
+### `yarn test`
+
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `yarn build`
+
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `yarn eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `yarn build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

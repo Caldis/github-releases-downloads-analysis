@@ -1,0 +1,57 @@
+/*global prefix*/
+* {
+  box-sizing: border-box;
+  font-family: "Microsoft Yahei", "WenQuanYi Micro Hei", "PingFang SC", "Roboto", "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;
+}
+body, p {
+  margin: 0;
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+::selection {
+  //background:#13b5b9;
+  //color:#fff;
+}
+
+// Main Container Style
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+// Text Style
+h1 {
+  font-size: 38px !important;
+  font-weight: lighter;
+  margin: 10px 0;
+}
+h2 {
+  font-size: 32px !important;
+  font-weight: lighter;
+  margin: 10px 0;
+}
+h3 {
+  font-size: 26px !important;
+}
+h4 {
+  font-size: 20px !important;
+}
+h5 {
+  font-size: 14px !important;
+}
+
+// Block Style
+section {
+  position: relative;
+  margin: 40px auto;
+}
+
+.hr {
+  width: 100%;
+  height: 1px;
+  background-color: #eee;
+}
