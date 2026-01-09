@@ -1,22 +1,37 @@
-# Github Releases Download Analysis
-下载次数统计工具
+# Release Radar
 
-## Homepage | 主页
-http://gra.caldis.me
+Client-only GitHub release insights for maintainers and teams.
 
-## Features | 功能
-- Analysis of your repo releases downloads count
-- 统计 Github Releases 的各个版本的下载次数
+## Features
+- Release download analytics with time-range filters
+- Asset insights (OS, arch, file types, top artifacts)
+- Release cadence and monthly momentum
+- Community signals (languages, contributors)
+- Client-only privacy with rate-limit awareness
 
-## Tips | 小技巧
-- You can directly specify the url of repo's to query just like below.
-- 你可以直接在域名后跟上对应的 repo 链接来快速查询, 例如下面这样:
-- http://gra.caldis.me/?url=https://github.com/Caldis/Mos
-- http://gra.caldis.me/?url=https://github.com/shadowsocks/shadowsocks-windows
-- http://gra.caldis.me/?url=https://github.com/facebook/react
-- http://gra.caldis.me?url=https://github.com/lhc70000/iina
-- http://gra.caldis.me/?url=https://github.com/electron/electron
+## Getting Started
 
-## Limits | 限制
-- Because the limition of github's api, the download count of file Source code (zip) and Source code (tar.gz) in releases will not contain in result
-- 由于Github接口的限制, Releases 中的 Source code (zip) 与 Source code (tar.gz) 的下载量是不计入的
+```bash
+npm install
+npm run dev
+```
+
+## GitHub Pages
+- `npm run build` outputs to `docs/` (GitHub Pages ready).
+- Custom domain is configured via `public/CNAME`.
+
+## Usage
+- Open `https://gra.caldis.me` and enter `owner/repo` or a GitHub URL.
+- Direct query example: `https://gra.caldis.me?repo=owner/repo`.
+
+## Optional GitHub Token
+- Use a fine-grained PAT for higher rate limits or private repositories.
+- Create one at `https://github.com/settings/tokens?type=beta`.
+- Recommended permissions: `Metadata (read-only)` + `Contents (read-only)`.
+- Set an expiration date and only grant access to the repos you need.
+- Tokens are kept in the browser; they are only stored locally if you opt in.
+
+## Limits
+- Private repositories require authentication (not supported here).
+- GitHub REST API limits unauthenticated requests.
+- GitHub does not count source archive downloads (zip/tar) in release assets.
