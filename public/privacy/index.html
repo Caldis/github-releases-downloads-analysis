@@ -9,11 +9,20 @@
     <link rel="alternate" type="text/plain" href="/llms.txt" />
     <link rel="service-desc" type="application/openapi+json" href="/openapi.json" />
     <link rel="api-catalog" type="application/linkset+json" href="/.well-known/api-catalog" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X6JPNX7342"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-X6JPNX7342');
+    </script>
   </head>
   <body>
     <main>
       <h1>Privacy</h1>
       <p>GRA Release Radar is designed as a client-only static web application. Repository input is processed in the browser. The app calls GitHub REST API endpoints directly from the user's device and does not send repository queries, release results, or optional GitHub tokens to a first-party GRA backend.</p>
+      <p>The public pages load Google Analytics through measurement ID <code>G-X6JPNX7342</code> to understand aggregate site usage. Google Analytics may receive standard page-view metadata from the user's browser, such as the visited URL, referrer, user agent, approximate location derived from network information, and event timing. Repository input, release API responses, and optional GitHub tokens are not intentionally sent to Google Analytics by the application code.</p>
       <p>If the user chooses to remember a GitHub token, the token is stored in localStorage on that device. If the user does not choose the remember option, the token is kept only in the current browser session state. Users should create fine-grained tokens with the smallest repository access they need, and should revoke tokens from GitHub if they suspect exposure.</p>
       <p>The site is hosted as static files. Standard hosting and browser infrastructure may still process normal request metadata such as IP address, user agent, requested URL, and cache headers. GitHub receives API requests made by the user's browser and applies GitHub's own API limits and policies.</p>
     </main>

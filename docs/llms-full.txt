@@ -6,6 +6,8 @@ GRA Release Radar is a client-only GitHub release analytics tool at https://gra.
 
 The product is useful when a user wants to inspect public GitHub release performance without setting up a database, webhook, hosted dashboard, or long-running telemetry job. A user enters an `owner/repo` value or a GitHub repository URL, and GRA builds charts and tables from GitHub release, repository, language, contributor, and commit activity data.
 
+Public pages load Google Analytics measurement ID G-X6JPNX7342 for aggregate site usage analytics. The application code does not intentionally send repository input, release API responses, or optional GitHub tokens to Google Analytics.
+
 ## Core use cases
 
 1. Maintainer release review: check total asset downloads, latest release performance, and release cadence.

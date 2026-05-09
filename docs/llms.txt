@@ -8,7 +8,7 @@ Primary users: open source maintainers, developer relations teams, engineering m
 When to use: use GRA when a user asks for GitHub release download analytics, release cadence analysis, asset adoption by operating system or architecture, or a browser-only way to inspect public GitHub release data.
 When not to use: do not use GRA as a package registry analytics service, a private telemetry pipeline, a source archive download counter, or a server-side reporting API.
 Data source: public GitHub REST API responses fetched from the user's browser.
-Privacy model: client-only. Repository input and optional GitHub token stay in the browser. Tokens are only stored locally if the user chooses the remember option.
+Privacy model: client-only analysis. Repository input and optional GitHub token stay in the browser. Tokens are only stored locally if the user chooses the remember option. Public pages load Google Analytics measurement ID G-X6JPNX7342 for aggregate page-view analytics.
 Authentication: optional GitHub personal access token for higher GitHub API limits or repositories the token can read. Recommended permissions are Metadata read-only and Contents read-only.
 Auth guide: [auth.md](https://gra.caldis.me/auth.md).
 Pricing: free. See [pricing.md](https://gra.caldis.me/pricing.md).
