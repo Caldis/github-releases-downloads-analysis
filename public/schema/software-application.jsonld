@@ -1,0 +1,28 @@
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "GRA Release Radar",
+  "alternateName": ["Release Radar", "GitHub Release Download Analysis"],
+  "url": "https://gra.caldis.me/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Web",
+  "description": "Client-only GitHub release analytics for maintainers and teams.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "url": "https://gra.caldis.me/pricing.md"
+  },
+  "softwareHelp": "https://gra.caldis.me/docs/",
+  "featureList": [
+    "GitHub release asset download analytics",
+    "Release cadence and monthly momentum",
+    "Operating system and architecture breakdowns",
+    "Artifact type and package coverage analysis",
+    "Client-only optional GitHub token support"
+  ],
+  "sameAs": [
+    "https://github.com/Caldis/github-releases-downloads-analysis",
+    "https://gra.caldis.me/llms.txt"
+  ]
+}

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GRA Release Radar docs - GitHub release analytics guide</title>
+    <meta name="description" content="Documentation for GRA Release Radar, a client-only GitHub release analytics tool for maintainers and teams." />
+    <link rel="canonical" href="https://gra.caldis.me/docs/" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" />
+    <link rel="alternate" type="text/markdown" href="/index.md" />
+  </head>
+  <body>
+    <main>
+      <h1>GRA Release Radar documentation</h1>
+      <p>GRA Release Radar helps maintainers inspect public GitHub release assets without setting up a hosted analytics service. The app reads GitHub REST API data in the user's browser and turns it into release download, cadence, packaging, and repository context views.</p>
+      <h2>Quickstart</h2>
+      <ol>
+        <li>Open <a href="/">gra.caldis.me</a>.</li>
+        <li>Enter a repository in <code>owner/repo</code> format, such as <code>vercel/next.js</code>, or paste a GitHub repository URL.</li>
+        <li>Review total downloads, releases, asset count, median cadence, monthly momentum, and package breakdowns.</li>
+        <li>Use the prerelease toggle and time range filter when you need a narrower view.</li>
+      </ol>
+      <h2>What the metrics mean</h2>
+      <p>Total downloads are calculated from GitHub release asset <code>download_count</code> values. GitHub does not count source archive zip or tarball downloads as release asset downloads, so those source archive numbers are not included. Operating system, architecture, and artifact type are inferred from asset filenames and file extensions.</p>
+      <h2>Authentication</h2>
+      <p>A token is optional. Without a token, GitHub applies unauthenticated REST API limits to the user's network. If a repository needs more quota or private access allowed by the user's token, the user can paste a fine-grained personal access token in the browser. Recommended permissions are Metadata read-only and Contents read-only. GRA does not operate an OAuth server and does not send the token to a first-party backend.</p>
+      <h2>Errors and retry guidance</h2>
+      <p>GitHub primary and secondary rate limits can both stop a query. GRA reads GitHub rate limit headers when available and avoids repeating requests that are known to be non-retryable. If a cached anonymous result exists, GRA can show stale cached data when the current GitHub API call is limited.</p>
+      <h2>Agent resources</h2>
+      <ul>
+        <li><a href="/llms.txt">llms.txt</a></li>
+        <li><a href="/llms-full.txt">llms-full.txt</a></li>
+        <li><a href="/developers/">developer resources</a></li>
+        <li><a href="/pricing.md">pricing.md</a></li>
+        <li><a href="/openapi.json">OpenAPI service description</a></li>
+      </ul>
+    </main>
+  </body>
+</html>

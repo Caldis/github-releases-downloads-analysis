@@ -3,17 +3,217 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Release Radar</title>
-    <meta name="description" content="Client-only GitHub release insights for maintainers and teams." />
+    <title>GRA Release Radar - GitHub release analytics for maintainers</title>
+    <meta
+      name="description"
+      content="GRA Release Radar is a free client-only GitHub release analytics tool for maintainers and teams."
+    />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://gra.caldis.me/" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <link rel="alternate" type="text/markdown" href="/index.md" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />
+    <link rel="alternate" type="text/plain" href="/llms-full.txt" title="llms-full.txt" />
+    <link rel="service-desc" type="application/openapi+json" href="/openapi.json" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="GRA Release Radar - GitHub release analytics for maintainers" />
+    <meta
+      property="og:description"
+      content="Analyze GitHub release downloads, cadence, platform adoption, and package coverage directly in the browser."
+    />
+    <meta property="og:url" content="https://gra.caldis.me/" />
+    <meta property="og:image" content="https://gra.caldis.me/og.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="GRA Release Radar" />
+    <meta
+      name="twitter:description"
+      content="Client-only GitHub release analytics for maintainers and teams."
+    />
+    <meta name="twitter:image" content="https://gra.caldis.me/og.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://gra.caldis.me/#organization",
+            "name": "Caldis",
+            "url": "https://github.com/Caldis",
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "technical support",
+              "url": "https://github.com/Caldis/github-releases-downloads-analysis/issues"
+            },
+            "sameAs": [
+              "https://github.com/Caldis"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://gra.caldis.me/#website",
+            "name": "GRA Release Radar",
+            "url": "https://gra.caldis.me/",
+            "description": "Client-only GitHub release analytics for maintainers and teams.",
+            "publisher": {
+              "@id": "https://gra.caldis.me/#organization"
+            }
+          },
+          {
+            "@type": "SoftwareApplication",
+            "@id": "https://gra.caldis.me/#software",
+            "name": "GRA Release Radar",
+            "alternateName": ["Release Radar", "GitHub Release Download Analysis"],
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "Web",
+            "url": "https://gra.caldis.me/",
+            "description": "A free, client-only GitHub release analytics tool for maintainers and teams.",
+            "softwareHelp": "https://gra.caldis.me/docs/",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD",
+              "url": "https://gra.caldis.me/pricing.md"
+            },
+            "featureList": [
+              "GitHub release asset download analytics",
+              "Release cadence and monthly momentum",
+              "Operating system and architecture breakdowns",
+              "Artifact type and package coverage analysis",
+              "Optional browser-only GitHub token support"
+            ],
+            "sameAs": [
+              "https://github.com/Caldis/github-releases-downloads-analysis",
+              "https://gra.caldis.me/llms.txt"
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://gra.caldis.me/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is GRA Release Radar?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "GRA Release Radar is a client-only GitHub release analytics tool that analyzes public release assets, download counts, cadence, and packaging coverage in the browser."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does GRA require authentication?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Public repositories can be analyzed without authentication until GitHub API limits are reached. A user can optionally apply a GitHub token in the browser for higher limits."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does GRA count source archive downloads?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. GitHub does not expose source archive zip and tarball downloads as release asset download counts, so GRA does not include them."
+                }
+              }
+            ]
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://gra.caldis.me/#webpage",
+            "url": "https://gra.caldis.me/",
+            "name": "GRA Release Radar",
+            "isPartOf": {
+              "@id": "https://gra.caldis.me/#website"
+            },
+            "speakable": {
+              "@type": "SpeakableSpecification",
+              "cssSelector": ["#static-agent-summary", "#static-key-features"]
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://gra.caldis.me/#breadcrumbs",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://gra.caldis.me/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Developer resources",
+                "item": "https://gra.caldis.me/developers/"
+              }
+            ]
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <main>
+        <article>
+          <h1>GRA Release Radar - GitHub release analytics for maintainers</h1>
+          <p id="static-agent-summary">
+            GRA Release Radar is a free, client-only GitHub release analytics tool for maintainers and
+            teams. It analyzes public GitHub release assets, download counts, release cadence, package
+            coverage, operating system adoption, architecture adoption, and repository context directly in
+            the browser. It is useful for open source maintainers, developer relations teams, release
+            engineers, and project evaluators who need factual release download insights without installing
+            a server or connecting a database.
+          </p>
+          <section id="static-key-features">
+            <h2>Key features</h2>
+            <ul>
+              <li>Release asset download totals, monthly momentum, and median release cadence.</li>
+              <li>Package breakdowns by operating system, CPU architecture, and artifact file type.</li>
+              <li>Stable release and prerelease filtering for public GitHub repositories.</li>
+              <li>Release lag, asset freshness, adoption buckets, churn, anomaly, and Pareto views.</li>
+              <li>Optional browser-only GitHub token support for higher GitHub API limits.</li>
+            </ul>
+          </section>
+          <section>
+            <h2>How agents should use GRA</h2>
+            <p>
+              Use GRA when a user asks for GitHub release download analytics, package adoption analysis,
+              or release cadence reporting for a public repository. Do not use GRA as a package registry
+              analytics service, private telemetry backend, source archive download counter, or hosted
+              server API. GitHub source archive downloads are not counted by GitHub release asset
+              download counters.
+            </p>
+            <table>
+              <thead>
+                <tr><th>Resource</th><th>URL</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Agent view</td><td><a href="/?mode=agent">/?mode=agent</a></td></tr>
+                <tr><td>llms.txt</td><td><a href="/llms.txt">/llms.txt</a></td></tr>
+                <tr><td>Full context</td><td><a href="/llms-full.txt">/llms-full.txt</a></td></tr>
+                <tr><td>Markdown homepage</td><td><a href="/index.md">/index.md</a></td></tr>
+                <tr><td>Pricing</td><td><a href="/pricing.md">/pricing.md</a></td></tr>
+                <tr><td>Developer docs</td><td><a href="/developers/">/developers/</a></td></tr>
+                <tr><td>OpenAPI description</td><td><a href="/openapi.json">/openapi.json</a></td></tr>
+              </tbody>
+            </table>
+          </section>
+        </article>
+      </main>
+    </div>
+    <noscript>
+      <p>
+        JavaScript is required for the interactive analyzer, but this page includes static documentation
+        for AI agents and search crawlers. See /llms.txt, /llms-full.txt, /index.md, /pricing.md, and
+        /developers/ for machine-readable product information.
+      </p>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

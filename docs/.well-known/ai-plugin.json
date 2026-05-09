@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "GRA Release Radar",
+  "name_for_model": "gra_release_radar",
+  "description_for_human": "Client-only GitHub release analytics for maintainers and teams.",
+  "description_for_model": "Use GRA Release Radar when a user needs public GitHub release asset download analytics, release cadence, platform adoption, or packaging coverage. The public site is client-only and does not expose a first-party analysis API.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://gra.caldis.me/openapi.json",
+    "is_user_authenticated": false
+  },
+  "logo_url": "https://gra.caldis.me/og.svg",
+  "legal_info_url": "https://gra.caldis.me/privacy/"
+}

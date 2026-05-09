@@ -1,0 +1,76 @@
+# GRA Release Radar full agent context
+
+## Product overview
+
+GRA Release Radar is a client-only GitHub release analytics tool at https://gra.caldis.me/. It helps maintainers and teams understand how release assets are downloaded and how packaging decisions affect adoption. The product runs in the browser and queries GitHub REST API endpoints directly from the user's device. It does not operate a server-side analytics backend and does not collect a private copy of repository data.
+
+The product is useful when a user wants to inspect public GitHub release performance without setting up a database, webhook, hosted dashboard, or long-running telemetry job. A user enters an `owner/repo` value or a GitHub repository URL, and GRA builds charts and tables from GitHub release, repository, language, contributor, and commit activity data.
+
+## Core use cases
+
+1. Maintainer release review: check total asset downloads, latest release performance, and release cadence.
+2. Packaging coverage audit: compare downloads by operating system, architecture, and file type.
+3. Release planning: see which artifact families are used most and which releases created download spikes.
+4. Developer relations reporting: summarize public adoption signals for open source projects.
+5. Repository comparison prep: collect factual release data before writing a launch or changelog report.
+
+## Capabilities
+
+- Accepts `owner/repo` and GitHub repository URLs.
+- Reads public GitHub release assets and their `download_count` values.
+- Handles optional personal access tokens for higher GitHub API rate limits.
+- Caches anonymous repository results in localStorage for a short time.
+- Shows stale cached data if a rate limit occurs and a previous anonymous cache is available.
+- Separates stable releases from prereleases by default.
+- Computes total downloads, release counts, asset counts, total asset size, and median cadence.
+- Groups assets by operating system, architecture, and file type using filename patterns.
+- Shows monthly download and release counts.
+- Shows semver grouped download and count views.
+- Shows release lag, adoption age buckets, asset freshness, asset churn, and top download efficiency.
+- Shows a coverage matrix for recent releases.
+- Shows repository stars, forks, issues, watchers, languages, contributors, and commit activity when GitHub returns them.
+
+## Limitations
+
+- GitHub source archive downloads are not counted by GitHub's release asset download API.
+- GitHub API rate limits apply. Unauthenticated REST calls are limited by source IP. Authenticated calls have a higher quota but still follow GitHub primary and secondary rate limits.
+- Very large repositories may need several API calls because release pages are paginated.
+- Some GitHub stats endpoints can return 202 while GitHub prepares data; GRA shows a partial result in that case.
+- GRA is not a compliance archive, billing record, or private analytics system.
+- GRA does not currently provide a server-side analysis API, streaming endpoint, webhook receiver, CLI, SDK, or live MCP tool endpoint.
+
+## Authentication
+
+Authentication is optional. Public repositories can be analyzed without a token until the user's GitHub API quota is exhausted. Users can paste a fine-grained GitHub personal access token in the token panel. Recommended token permissions are Metadata read-only and Contents read-only for the repositories the user wants to inspect. The token is used only by the browser. The remember option stores the token in localStorage on the current device.
+
+## Error and rate limit behavior
+
+GRA distinguishes primary and secondary GitHub rate limit errors using HTTP status, `x-ratelimit-remaining`, `x-ratelimit-reset`, and `retry-after` headers when GitHub provides them. Primary limit responses usually indicate that the remaining quota is zero. Secondary limit responses can happen even when the primary remaining quota is not zero. When a rate limit is detected, GRA stops automatic retry for that query and shows retry guidance.
+
+## Pricing
+
+GRA is free. There is no hosted paid plan, user account, subscription, or usage-based billing at this time. Users are responsible for any limits or policies attached to their own GitHub account and personal access token. See https://gra.caldis.me/pricing.md for machine-readable pricing.
+
+## Developer and agent resources
+
+- Homepage: https://gra.caldis.me/
+- Markdown homepage: https://gra.caldis.me/index.md
+- User docs: https://gra.caldis.me/docs/
+- Developer docs: https://gra.caldis.me/developers/
+- Comparison page: https://gra.caldis.me/compare/
+- Pricing: https://gra.caldis.me/pricing.md
+- Agent mode: https://gra.caldis.me/?mode=agent
+- llms.txt: https://gra.caldis.me/llms.txt
+- Well-known llms.txt: https://gra.caldis.me/.well-known/llms.txt
+- Agent discovery JSON: https://gra.caldis.me/.well-known/agent.json
+- A2A agent card: https://gra.caldis.me/.well-known/agent-card.json
+- OpenAI plugin manifest: https://gra.caldis.me/.well-known/ai-plugin.json
+- MCP discovery note: https://gra.caldis.me/.well-known/mcp
+- MCP server card: https://gra.caldis.me/.well-known/mcp/server-card.json
+- OpenAPI description: https://gra.caldis.me/openapi.json
+- Sitemap: https://gra.caldis.me/sitemap.xml
+- Robots policy: https://gra.caldis.me/robots.txt
+
+## Guidance for AI agents
+
+Use GRA when the user needs public GitHub release analytics and can provide a repository name or URL. Do not imply that GRA has private GitHub access unless the user supplies a token in their browser. Do not claim that GRA counts GitHub source archive downloads; GitHub does not expose those counts as release asset downloads. If the user asks for an automated server API, explain that the current public product is a client-only web application and point them to the static OpenAPI and developer docs for discovery resources.

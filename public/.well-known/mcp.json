@@ -1,0 +1,9 @@
+{
+  "name": "GRA Release Radar MCP discovery",
+  "status": "not_live",
+  "description": "GRA Release Radar currently publishes static agent discovery resources but does not operate a live MCP transport endpoint.",
+  "serverCard": "https://gra.caldis.me/.well-known/mcp/server-card.json",
+  "docs": "https://gra.caldis.me/developers/",
+  "llms": "https://gra.caldis.me/llms.txt",
+  "reason": "The public product is a static client-side GitHub Pages application. It does not run a server process that can accept MCP Streamable HTTP sessions."
+}

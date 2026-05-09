@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">GRA Release Radar social image</title>
+  <desc id="desc">Client-only GitHub release analytics for maintainers and teams.</desc>
+  <rect width="1200" height="630" fill="#f5f5f1"/>
+  <rect x="72" y="72" width="1056" height="486" rx="18" fill="#ffffff" stroke="#d1d1c8" stroke-width="2"/>
+  <text x="116" y="170" fill="#111111" font-family="Arial, sans-serif" font-size="34" font-weight="700">GRA Release Radar</text>
+  <text x="116" y="235" fill="#333333" font-family="Arial, sans-serif" font-size="58" font-weight="700">GitHub release analytics</text>
+  <text x="116" y="300" fill="#333333" font-family="Arial, sans-serif" font-size="58" font-weight="700">for maintainers</text>
+  <text x="116" y="370" fill="#555555" font-family="Arial, sans-serif" font-size="26">Downloads, cadence, platform adoption, and package coverage.</text>
+  <g transform="translate(116 430)">
+    <rect width="190" height="54" rx="8" fill="#111111"/>
+    <text x="24" y="36" fill="#ffffff" font-family="Arial, sans-serif" font-size="20" font-weight="700">Client-only</text>
+    <rect x="214" width="238" height="54" rx="8" fill="#ecece4" stroke="#d1d1c8"/>
+    <text x="238" y="36" fill="#111111" font-family="Arial, sans-serif" font-size="20" font-weight="700">GitHub REST API</text>
+  </g>
+</svg>

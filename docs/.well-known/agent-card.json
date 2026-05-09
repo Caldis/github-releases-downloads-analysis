@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "0.3.0",
+  "name": "GRA Release Radar",
+  "description": "A browser-based assistant surface for GitHub release download and packaging analysis.",
+  "url": "https://gra.caldis.me/",
+  "version": "0.2.0",
+  "preferredTransport": "web",
+  "provider": {
+    "name": "Caldis",
+    "url": "https://github.com/Caldis"
+  },
+  "skills": [
+    {
+      "id": "analyze_github_release_downloads",
+      "name": "Analyze GitHub release downloads",
+      "description": "Open the web app with a repository query and analyze public release asset downloads, cadence, package matrix, and repository context.",
+      "inputModes": ["text/uri-list", "text/plain"],
+      "outputModes": ["text/html"],
+      "examples": [
+        "https://gra.caldis.me/?repo=vercel/next.js",
+        "https://gra.caldis.me/?repo=tauri-apps/tauri"
+      ]
+    }
+  ],
+  "authentication": {
+    "schemes": ["none", "user_supplied_github_pat"],
+    "notes": "A GitHub token is optional and is entered by the user in the browser. GRA does not operate an OAuth server."
+  },
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "stateTransitionHistory": false
+  },
+  "documentationUrl": "https://gra.caldis.me/developers/",
+  "privacyUrl": "https://gra.caldis.me/privacy/"
+}

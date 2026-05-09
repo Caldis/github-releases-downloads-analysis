@@ -1,0 +1,133 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "GRA Release Radar public discovery resources",
+    "version": "0.2.0",
+    "description": "Static documentation and discovery resources for GRA Release Radar. The current public product is a client-only browser app and does not expose a first-party analysis API."
+  },
+  "servers": [
+    {
+      "url": "https://gra.caldis.me",
+      "description": "Static GitHub Pages site"
+    }
+  ],
+  "paths": {
+    "/index.md": {
+      "get": {
+        "operationId": "getMarkdownHomepage",
+        "summary": "Get the markdown homepage",
+        "responses": {
+          "200": {
+            "description": "Markdown homepage content",
+            "content": {
+              "text/markdown": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/llms.txt": {
+      "get": {
+        "operationId": "getLlmsTxt",
+        "summary": "Get compact agent instructions",
+        "responses": {
+          "200": {
+            "description": "Plain-text agent overview",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/llms-full.txt": {
+      "get": {
+        "operationId": "getFullAgentContext",
+        "summary": "Get full product context for AI agents",
+        "responses": {
+          "200": {
+            "description": "Full plain-text product documentation",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pricing.md": {
+      "get": {
+        "operationId": "getPricingMarkdown",
+        "summary": "Get machine-readable pricing",
+        "responses": {
+          "200": {
+            "description": "Markdown pricing table",
+            "content": {
+              "text/markdown": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/status.json": {
+      "get": {
+        "operationId": "getStaticStatus",
+        "summary": "Get static site status notes",
+        "responses": {
+          "200": {
+            "description": "Static status JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StaticStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "StaticStatus": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "status": { "type": "string" },
+          "updated": { "type": "string", "format": "date" },
+          "homepage": { "type": "string", "format": "uri" },
+          "notes": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "required": ["name", "status", "updated", "homepage", "notes"]
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": { "type": "string" },
+          "message": { "type": "string" },
+          "hint": { "type": "string" }
+        },
+        "required": ["code", "message"]
+      }
+    }
+  }
+}

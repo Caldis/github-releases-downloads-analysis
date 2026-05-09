@@ -13,13 +13,27 @@ const API_HEADERS = {
   'X-GitHub-Api-Version': '2022-11-28',
 }
 
-const DEFAULT_RATE_LIMIT: RateLimitInfo = { remaining: null, reset: null }
+const DEFAULT_RATE_LIMIT: RateLimitInfo = {
+  limit: null,
+  remaining: null,
+  reset: null,
+  used: null,
+  retryAfter: null,
+}
 const CACHE_KEY_PREFIX = 'release-radar:repo:'
 const CACHE_TTL_MS = 1000 * 60 * 30
+const PRIMARY_RATE_LIMIT_MESSAGE_RE = /api rate limit/i
+const RATE_LIMIT_MESSAGE_RE = /\brate limit\b/i
+const SECONDARY_RATE_LIMIT_MESSAGE_RE = /secondary rate limit/i
 
 type RepoCache = {
   timestamp: number
   data: RepoData
+}
+
+type GitHubApiError = Error & {
+  status?: number
+  rateLimit?: RateLimitInfo
 }
 
 const hasStorage = () => typeof window !== 'undefined' && typeof window.localStorage !== 'undefined'
@@ -47,18 +61,48 @@ const writeCache = (key: string, data: RepoData) => {
   }
 }
 
-const isRateLimitError = (error: unknown) => {
-  if (!(error instanceof Error)) return false
+const isRateLimitStatus = (status: number | undefined) => status === 403 || status === 429
+
+export type GitHubRateLimitKind = 'primary' | 'secondary' | 'unknown' | 'none'
+
+export const getGitHubRateLimitKind = (error: unknown): GitHubRateLimitKind => {
+  if (!(error instanceof Error)) return 'none'
+  const apiError = error as GitHubApiError
+  if (!isRateLimitStatus(apiError.status)) return 'none'
+
   const message = error.message.toLowerCase()
-  return message.includes('rate limit')
+  if (SECONDARY_RATE_LIMIT_MESSAGE_RE.test(message)) return 'secondary'
+  if (apiError.rateLimit?.remaining === 0) return 'primary'
+  if (PRIMARY_RATE_LIMIT_MESSAGE_RE.test(message)) return 'primary'
+  if (apiError.rateLimit?.retryAfter) return 'unknown'
+  if (RATE_LIMIT_MESSAGE_RE.test(message)) return 'unknown'
+  return 'none'
+}
+
+export const isGitHubRateLimitError = (error: unknown) =>
+  getGitHubRateLimitKind(error) !== 'none'
+
+export const isGitHubNonRetryableError = (error: unknown) => {
+  if (!(error instanceof Error)) return false
+  const status = (error as GitHubApiError).status
+  return isGitHubRateLimitError(error) || status === 401 || status === 403 || status === 404 || status === 429
+}
+
+const isRateLimitError = (error: unknown) => isGitHubRateLimitError(error)
+
+const parseHeaderNumber = (value: string | null) => {
+  if (!value) return null
+  const parsed = Number(value)
+  return Number.isFinite(parsed) ? parsed : null
 }
 
 const getRateLimit = (headers: Headers): RateLimitInfo => {
-  const remaining = headers.get('x-ratelimit-remaining')
-  const reset = headers.get('x-ratelimit-reset')
   return {
-    remaining: remaining ? Number(remaining) : null,
-    reset: reset ? Number(reset) : null,
+    limit: parseHeaderNumber(headers.get('x-ratelimit-limit')),
+    remaining: parseHeaderNumber(headers.get('x-ratelimit-remaining')),
+    reset: parseHeaderNumber(headers.get('x-ratelimit-reset')),
+    used: parseHeaderNumber(headers.get('x-ratelimit-used')),
+    retryAfter: parseHeaderNumber(headers.get('retry-after')),
   }
 }
 

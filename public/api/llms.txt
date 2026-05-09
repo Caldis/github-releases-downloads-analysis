@@ -1,0 +1,8 @@
+# GRA Release Radar API context
+
+Current API status: no first-party hosted analysis API.
+
+The public OpenAPI file at /openapi.json documents static discovery and documentation resources only. The runtime application calls GitHub REST API endpoints from the user's browser. Agents should not call a fictional /api/analyze endpoint because it does not exist.
+
+If a user asks how to automate analysis today, direct them to the browser URL pattern:
+https://gra.caldis.me/?repo=owner/repo

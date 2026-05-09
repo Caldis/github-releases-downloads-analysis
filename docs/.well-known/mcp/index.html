@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>GRA Release Radar MCP discovery</title>
+    <meta name="robots" content="index,follow" />
+  </head>
+  <body>
+    <main>
+      <h1>GRA Release Radar MCP discovery</h1>
+      <p>GRA Release Radar currently publishes static agent discovery resources but does not operate a live MCP transport endpoint.</p>
+      <script type="application/json" id="mcp-discovery">
+        {
+          "name": "GRA Release Radar MCP discovery",
+          "status": "not_live",
+          "description": "The public product is a static client-side GitHub Pages application. It does not run a server process that can accept MCP Streamable HTTP sessions.",
+          "serverCard": "https://gra.caldis.me/.well-known/mcp/server-card.json",
+          "docs": "https://gra.caldis.me/developers/",
+          "llms": "https://gra.caldis.me/llms.txt"
+        }
+      </script>
+      <p><a href="/.well-known/mcp/server-card.json">MCP server card</a></p>
+    </main>
+  </body>
+</html>

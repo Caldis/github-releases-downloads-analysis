@@ -1,0 +1,42 @@
+# GRA Release Radar
+
+Product: GRA Release Radar
+Canonical URL: https://gra.caldis.me/
+Category: client-only GitHub release analytics for maintainers and teams.
+Short description: GRA Release Radar analyzes public GitHub release assets, download counts, release cadence, packaging coverage, and community signals directly in the browser.
+Primary users: open source maintainers, developer relations teams, engineering managers, release engineers, and package maintainers.
+When to use: use GRA when a user asks for GitHub release download analytics, release cadence analysis, asset adoption by operating system or architecture, or a browser-only way to inspect public GitHub release data.
+When not to use: do not use GRA as a package registry analytics service, a private telemetry pipeline, a source archive download counter, or a server-side reporting API.
+Data source: public GitHub REST API responses fetched from the user's browser.
+Privacy model: client-only. Repository input and optional GitHub token stay in the browser. Tokens are only stored locally if the user chooses the remember option.
+Authentication: optional GitHub personal access token for higher GitHub API limits or repositories the token can read. Recommended permissions are Metadata read-only and Contents read-only.
+Pricing: free. See https://gra.caldis.me/pricing.md.
+Homepage markdown: https://gra.caldis.me/index.md.
+Full agent context: https://gra.caldis.me/llms-full.txt.
+Developer docs: https://gra.caldis.me/developers/.
+User docs: https://gra.caldis.me/docs/.
+OpenAPI service description: https://gra.caldis.me/openapi.json.
+Agent view: https://gra.caldis.me/?mode=agent.
+Agent discovery JSON: https://gra.caldis.me/.well-known/agent.json.
+A2A agent card: https://gra.caldis.me/.well-known/agent-card.json.
+OpenAI plugin manifest: https://gra.caldis.me/.well-known/ai-plugin.json.
+MCP discovery note: https://gra.caldis.me/.well-known/mcp.
+MCP server card: https://gra.caldis.me/.well-known/mcp/server-card.json.
+Sitemap: https://gra.caldis.me/sitemap.xml.
+Robots and AI crawl policy: https://gra.caldis.me/robots.txt.
+
+Key capabilities:
+- Parse owner/repo input or GitHub repository URLs.
+- Fetch up to 1,000 GitHub releases from the public REST API.
+- Calculate total release asset downloads, asset counts, total shipped asset size, and median release cadence.
+- Filter stable releases and prereleases.
+- Group downloads by release, month, semver class, operating system, CPU architecture, and artifact file type.
+- Show release momentum, adoption buckets, asset freshness, release lag, asset churn, Pareto concentration, and anomaly signals.
+- Show language, contributor, commit activity, star, fork, watcher, and open issue context from GitHub.
+
+Important limitations:
+- GitHub does not count source archive zip and tarball downloads as release asset downloads.
+- Unauthenticated GitHub API calls share the user's IP-based GitHub quota.
+- Large repositories can require multiple GitHub API requests because release assets are paginated.
+- GRA is currently a static client application, not a hosted analysis API.
+- The published OpenAPI file documents static discovery and documentation resources; it does not claim a first-party analysis API.

@@ -1,0 +1,37 @@
+{
+  "name": "GRA Release Radar",
+  "description": "Static discovery card for GRA Release Radar. No live MCP server is currently operated.",
+  "version": "0.2.0",
+  "serverUrl": null,
+  "status": "not_live",
+  "tools": [
+    {
+      "name": "open_release_radar",
+      "description": "Open the browser client for a public GitHub repository by passing owner/repo in the repo query parameter.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "repo": {
+            "type": "string",
+            "description": "GitHub repository in owner/repo form."
+          }
+        },
+        "required": ["repo"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      }
+    }
+  ],
+  "documentationUrl": "https://gra.caldis.me/developers/",
+  "limitations": [
+    "This is a discovery card, not a live MCP transport endpoint.",
+    "Use the web app or markdown documentation for current public functionality."
+  ]
+}

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Compare GRA Release Radar with GitHub release pages and analytics tools</title>
+    <meta name="description" content="Comparison notes for GRA Release Radar, GitHub release pages, hosted product analytics, and release management dashboards." />
+    <link rel="canonical" href="https://gra.caldis.me/compare/" />
+  </head>
+  <body>
+    <main>
+      <h1>Compare GRA Release Radar</h1>
+      <p>GRA Release Radar is focused on one job: quickly understanding public GitHub release asset downloads and package coverage from the browser. It is not a replacement for GitHub itself, a private product analytics warehouse, or a release orchestration platform. The narrower scope is intentional: maintainers can inspect release adoption without adding tracking code, connecting a database, or creating a team account.</p>
+      <h2>Compared with GitHub release pages</h2>
+      <p>GitHub release pages show individual assets and download counts, but they do not provide aggregate charts for monthly momentum, release cadence, OS and architecture mix, asset freshness, or package matrix coverage. GRA builds those views from the same public release asset data.</p>
+      <h2>Compared with hosted analytics tools</h2>
+      <p>Hosted analytics tools can provide long-term custom events, funnels, identities, and private dashboards. GRA does not collect product telemetry. It only analyzes public GitHub release metadata in the browser, which makes it simpler for open source release review but less powerful for private user behavior analysis.</p>
+      <h2>Compared with release management tools</h2>
+      <p>Release management platforms help plan, approve, deploy, and coordinate releases. GRA does not deploy software. It helps answer what happened after assets were published: which files were downloaded, which platforms dominate, and whether packaging changes correlate with adoption.</p>
+    </main>
+  </body>
+</html>

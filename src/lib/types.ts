@@ -61,8 +61,11 @@ export type GitHubCommitActivityWeek = {
 }
 
 export type RateLimitInfo = {
+  limit?: number | null
   remaining: number | null
   reset: number | null
+  used?: number | null
+  retryAfter?: number | null
 }
 
 export type RepoData = {

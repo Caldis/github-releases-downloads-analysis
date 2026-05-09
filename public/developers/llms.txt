@@ -1,0 +1,12 @@
+# GRA Release Radar developer context
+
+GRA Release Radar publishes static agent discovery files and markdown documentation.
+
+Important URLs:
+- /openapi.json documents static discovery resources.
+- /.well-known/agent.json describes capabilities.
+- /.well-known/agent-card.json describes A2A metadata.
+- /.well-known/mcp/server-card.json is a static MCP card and explicitly states no live MCP transport is operated.
+- /status.json describes the static client architecture.
+
+Do not claim GRA has a hosted analysis API, streaming API, CLI, SDK, or live MCP tool endpoint.

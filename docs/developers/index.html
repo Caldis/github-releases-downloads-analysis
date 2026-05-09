@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GRA Release Radar developer resources and agent docs</title>
+    <meta name="description" content="Developer and AI agent resources for GRA Release Radar, including llms.txt, OpenAPI discovery, agent cards, MCP notes, and rate-limit guidance." />
+    <link rel="canonical" href="https://gra.caldis.me/developers/" />
+  </head>
+  <body>
+    <main>
+      <h1>Developer and agent resources for GRA Release Radar</h1>
+      <p>GRA Release Radar is currently a static, client-only browser application. These developer resources are provided so AI agents, search engines, and maintainers can understand exactly what the product can and cannot do. The site publishes discovery files, markdown documentation, pricing information, and static service descriptions. It does not currently publish a live first-party analysis API, streaming endpoint, SDK, CLI, webhook receiver, or MCP transport.</p>
+      <h2>Discovery URLs</h2>
+      <table>
+        <thead><tr><th>Resource</th><th>URL</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>llms.txt</td><td><a href="/llms.txt">/llms.txt</a></td><td>Compact AI-readable product summary.</td></tr>
+          <tr><td>llms-full.txt</td><td><a href="/llms-full.txt">/llms-full.txt</a></td><td>Full AI-readable documentation in one request.</td></tr>
+          <tr><td>OpenAPI</td><td><a href="/openapi.json">/openapi.json</a></td><td>Static discovery and documentation resource schemas.</td></tr>
+          <tr><td>Agent JSON</td><td><a href="/.well-known/agent.json">/.well-known/agent.json</a></td><td>Agent capability description.</td></tr>
+          <tr><td>A2A card</td><td><a href="/.well-known/agent-card.json">/.well-known/agent-card.json</a></td><td>Agent-to-agent capability card.</td></tr>
+          <tr><td>MCP card</td><td><a href="/.well-known/mcp/server-card.json">/.well-known/mcp/server-card.json</a></td><td>Static MCP discovery note.</td></tr>
+          <tr><td>Pricing</td><td><a href="/pricing.md">/pricing.md</a></td><td>Machine-readable free pricing details.</td></tr>
+          <tr><td>Status</td><td><a href="/status.json">/status.json</a></td><td>Static status and architecture notes.</td></tr>
+        </tbody>
+      </table>
+      <h2>Rate limits</h2>
+      <p>GRA calls GitHub from the user's browser. Agents should expect GitHub primary and secondary REST API limits. The app reads GitHub rate-limit headers such as <code>x-ratelimit-remaining</code>, <code>x-ratelimit-reset</code>, and <code>retry-after</code> when available. For automated work, ask the user whether they want to provide a GitHub token in the browser.</p>
+      <h2>Example links</h2>
+      <pre><code>https://gra.caldis.me/?repo=vercel/next.js
+https://gra.caldis.me/?repo=tauri-apps/tauri
+https://gra.caldis.me/?mode=agent</code></pre>
+    </main>
+  </body>
+</html>

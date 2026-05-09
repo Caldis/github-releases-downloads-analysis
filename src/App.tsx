@@ -20,7 +20,6 @@ import {
   YAxis,
   ZAxis,
 } from 'recharts'
-import type { TooltipProps } from 'recharts'
 import {
   ArrowUpRight,
   Dot,
@@ -29,7 +28,7 @@ import {
   HeartPulse,
   Loader2,
 } from 'lucide-react'
-import { fetchRepoData } from '@/lib/github'
+import { fetchRepoData, getGitHubRateLimitKind, isGitHubRateLimitError } from '@/lib/github'
 import { buildMetrics } from '@/lib/metrics'
 import {
   formatBytes,
@@ -43,96 +42,120 @@ import {
 import { parseRepoInput } from '@/lib/parser'
 import type { RateLimitInfo } from '@/lib/types'
 import { chartPalette, ChartContainer, ChartTooltipContent } from '@/components/ui/chart'
+import { ChurnTooltip, ParetoTooltip, ScatterTooltip } from '@/components/ChartTooltips'
+import { MetricCard } from '@/components/MetricCard'
+import { SectionHeading } from '@/components/SectionHeading'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
+import { sectionNav } from '@/lib/navigation'
+import { getStoredRecents, getStoredToken, saveRecentRepos, saveTokenPreference } from '@/lib/storage'
+import { filterByTimeRange, timeRanges, type TimeRange } from '@/lib/timeRanges'
 import { cn } from '@/lib/utils'
 
 const sampleRepos = ['vercel/next.js', 'tauri-apps/tauri', 'hashicorp/terraform']
-const TOKEN_STORAGE_KEY = 'release-radar:token'
-const RECENT_REPOS_KEY = 'release-radar:recent-repos'
-const sectionNav = [
-  { id: 'overview', label: 'Overview' },
-  { id: 'signal-filters', label: 'Filters' },
-  { id: 'release-momentum', label: 'Momentum' },
-  { id: 'advanced-perspectives', label: 'Advanced' },
-  { id: 'asset-insights', label: 'Assets' },
-  { id: 'packaging-matrix', label: 'Matrix' },
-  { id: 'community-impact', label: 'Community' },
-  { id: 'release-ledger', label: 'Ledger' },
+const developerLinks = [
+  { href: '/docs/', label: 'Docs' },
+  { href: '/developers/', label: 'Developers' },
+  { href: '/pricing.md', label: 'Pricing' },
+  { href: '/llms.txt', label: 'llms.txt' },
+  { href: '/llms-full.txt', label: 'llms-full.txt' },
+  { href: '/openapi.json', label: 'OpenAPI' },
+  { href: '/.well-known/agent.json', label: 'Agent JSON' },
 ]
 
-const timeRanges = [
-  { value: 'all', label: 'All time' },
-  { value: '12m', label: 'Last 12 months' },
-  { value: '6m', label: 'Last 6 months' },
-]
-
-type TimeRange = (typeof timeRanges)[number]['value']
-
-const formatResetTime = (rateLimit: RateLimitInfo | undefined) => {
-  if (!rateLimit?.reset) return 'unknown'
-  return new Intl.DateTimeFormat('en-US', {
+const formatRetryTime = (rateLimit: RateLimitInfo | undefined) => {
+  if (rateLimit?.retryAfter) {
+    const minutes = Math.max(1, Math.ceil(rateLimit.retryAfter / 60))
+    return minutes === 1 ? 'in about 1 minute' : `in about ${minutes} minutes`
+  }
+  if (!rateLimit?.reset) return 'later'
+  const resetTime = new Intl.DateTimeFormat('en-US', {
     hour: '2-digit',
     minute: '2-digit',
   }).format(new Date(rateLimit.reset * 1000))
+  return `after ${resetTime}`
 }
 
-const getStoredToken = () => {
-  if (typeof window === 'undefined') return ''
-  try {
-    return window.localStorage.getItem(TOKEN_STORAGE_KEY) ?? ''
-  } catch (error) {
-    return ''
-  }
-}
+const AgentMode = () => (
+  <main className="mx-auto max-w-5xl px-6 py-10 text-sm text-neutral-800">
+    <section className="space-y-4">
+      <p className="text-xs uppercase tracking-[0.3em] text-neutral-500">GRA Release Radar</p>
+      <h1 className="text-3xl font-semibold tracking-tight">Agent-readable product profile</h1>
+      <p>
+        GRA Release Radar is a free client-only GitHub release analytics tool. It analyzes public
+        release asset downloads, release cadence, platform adoption, package coverage, and
+        repository context directly in the browser.
+      </p>
+    </section>
 
-const getStoredRecents = () => {
-  if (typeof window === 'undefined') return []
-  try {
-    const raw = window.localStorage.getItem(RECENT_REPOS_KEY)
-    if (!raw) return []
-    const parsed = JSON.parse(raw) as string[]
-    return Array.isArray(parsed) ? parsed.slice(0, 5) : []
-  } catch (error) {
-    return []
-  }
-}
+    <section className="mt-8">
+      <h2 className="text-xl font-semibold">Capabilities</h2>
+      <ul className="mt-3 list-disc space-y-2 pl-5">
+        <li>Analyze GitHub release asset download counts for public repositories.</li>
+        <li>Group downloads by release, month, operating system, architecture, and file type.</li>
+        <li>Show cadence, release lag, asset freshness, asset churn, adoption buckets, and anomaly signals.</li>
+        <li>Use an optional user-supplied GitHub token in the browser for higher GitHub API limits.</li>
+      </ul>
+    </section>
 
-const filterByTimeRange = <T,>(items: T[], getDate: (item: T) => string, range: TimeRange) => {
-  if (range === 'all') return items
-  const now = new Date()
-  const months = range === '12m' ? 12 : 6
-  const threshold = new Date(now.getFullYear(), now.getMonth() - months, now.getDate())
-  return items.filter((item) => new Date(getDate(item)).getTime() >= threshold.getTime())
-}
+    <section className="mt-8">
+      <h2 className="text-xl font-semibold">Authentication and limits</h2>
+      <p className="mt-3">
+        Authentication is optional. Unauthenticated requests use the user's IP-based GitHub REST API
+        quota. Authenticated requests use the user's GitHub account quota. Recommended token
+        permissions are Metadata read-only and Contents read-only. Tokens are not sent to a GRA
+        backend.
+      </p>
+    </section>
 
-const SectionHeading = ({ title, description }: { title: string; description?: string }) => (
-  <div className="mb-6">
-    <h2 className="text-2xl font-semibold tracking-tight">{title}</h2>
-    {description ? <p className="mt-2 text-sm text-muted">{description}</p> : null}
-  </div>
-)
+    <section className="mt-8">
+      <h2 className="text-xl font-semibold">Machine-readable resources</h2>
+      <dl className="mt-3 grid gap-3 sm:grid-cols-2">
+        {developerLinks.map((link) => (
+          <div key={link.href} className="rounded-md border border-border bg-white p-3">
+            <dt className="font-semibold">{link.label}</dt>
+            <dd>
+              <a className="text-neutral-600 underline" href={link.href}>{link.href}</a>
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </section>
 
-const MetricCard = ({ label, value, hint }: { label: string; value: string; hint?: string }) => (
-  <div className="rounded-lg border border-border bg-white/80 p-4">
-    <div className="text-xs uppercase tracking-wide text-neutral-500">{label}</div>
-    <div className="mt-2 text-xl font-semibold text-black font-mono">{value}</div>
-    {hint ? <div className="mt-1 text-xs text-neutral-500">{hint}</div> : null}
-  </div>
+    <section className="mt-8">
+      <h2 className="text-xl font-semibold">Current limitations</h2>
+      <ul className="mt-3 list-disc space-y-2 pl-5">
+        <li>No first-party hosted analysis API is currently operated.</li>
+        <li>No live MCP transport endpoint, SDK, CLI, webhook receiver, or streaming API is currently operated.</li>
+        <li>GitHub source archive downloads are not counted by GitHub release asset download counters.</li>
+      </ul>
+    </section>
+  </main>
 )
 
 export default function App() {
   const params = new URLSearchParams(window.location.search)
+  const isAgentMode = params.get('mode') === 'agent'
   const initialRepo = params.get('repo') || params.get('url') || ''
+
+  if (isAgentMode) {
+    return <AgentMode />
+  }
+
+  return <ReleaseRadarApp initialRepo={initialRepo} />
+}
+
+function ReleaseRadarApp({ initialRepo }: { initialRepo: string }) {
 
   const [input, setInput] = useState(initialRepo)
   const [repoId, setRepoId] = useState(() => parseRepoInput(initialRepo))
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [token, setToken] = useState(() => getStoredToken())
+  const [tokenInput, setTokenInput] = useState(() => getStoredToken())
   const [rememberToken, setRememberToken] = useState(() => Boolean(getStoredToken()))
   const [showToken, setShowToken] = useState(false)
   const [recentRepos, setRecentRepos] = useState<string[]>(() => getStoredRecents())
@@ -141,14 +164,7 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('overview')
 
   useEffect(() => {
-    if (typeof window === 'undefined') return
-    if (!rememberToken) {
-      window.localStorage.removeItem(TOKEN_STORAGE_KEY)
-      return
-    }
-    if (token) {
-      window.localStorage.setItem(TOKEN_STORAGE_KEY, token)
-    }
+    saveTokenPreference(token, rememberToken)
   }, [rememberToken, token])
 
   const updateRecentRepos = useCallback((repo: string) => {
@@ -156,9 +172,7 @@ export default function App() {
     if (!value) return
     setRecentRepos((prev) => {
       const next = [value, ...prev.filter((item) => item !== value)].slice(0, 5)
-      if (typeof window !== 'undefined') {
-        window.localStorage.setItem(RECENT_REPOS_KEY, JSON.stringify(next))
-      }
+      saveRecentRepos(next)
       return next
     })
   }, [])
@@ -178,13 +192,19 @@ export default function App() {
   })
 
   const statusError = query.error as (Error & { status?: number; rateLimit?: RateLimitInfo }) | null
-  const isRateLimited = statusError?.message?.toLowerCase().includes('rate limit')
+  const isRateLimited = statusError ? isGitHubRateLimitError(statusError) : false
+  const rateLimitKind = statusError ? getGitHubRateLimitKind(statusError) : 'none'
   const notFound = statusError?.status === 404
   const authError =
     statusError?.status === 401 ||
     (statusError?.status === 403 && !isRateLimited)
-  const showTokenPanel = Boolean(isRateLimited)
+  const showTokenPanel = Boolean(isRateLimited || authError)
   const isEmptyState = !query.data && !statusError && !query.isLoading
+  const hasTokenInputChange = tokenInput.trim() !== token
+  const rateLimitMessage =
+    rateLimitKind === 'secondary'
+      ? `GitHub secondary rate limit reached. Wait ${formatRetryTime(statusError?.rateLimit)} before retrying, or apply a token.`
+      : `GitHub API rate limit reached for this network or token. Try again ${formatRetryTime(statusError?.rateLimit)} or apply a token.`
 
   const metrics = useMemo(() => {
     if (!query.data) return null
@@ -285,78 +305,6 @@ export default function App() {
 
   const repo = query.data?.repo
 
-  const scatterTooltip = ({ active, payload }: TooltipProps<number, string>) => {
-    if (!active || !payload?.length) return null
-    const data = payload[0]?.payload as {
-      name: string
-      value: number
-      downloads: number
-      daysSince: number
-    }
-    if (!data) return null
-    return (
-      <div className="rounded-md border border-border bg-white px-3 py-2 text-xs shadow-lg">
-        <div className="mb-2 text-[11px] uppercase tracking-wide text-neutral-500">{data.name}</div>
-        <div className="flex flex-col gap-1">
-          <div className="flex items-center justify-between gap-4">
-            <span className="text-neutral-700">Downloads/day</span>
-            <span className="font-semibold text-black">{formatNumber(Math.round(data.value))}</span>
-          </div>
-          <div className="flex items-center justify-between gap-4">
-            <span className="text-neutral-700">Total downloads</span>
-            <span className="font-semibold text-black">{formatNumber(data.downloads)}</span>
-          </div>
-          <div className="flex items-center justify-between gap-4">
-            <span className="text-neutral-700">Days since</span>
-            <span className="font-semibold text-black">{formatNumber(data.daysSince)}</span>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  const paretoTooltip = ({ active, payload }: TooltipProps<number, string>) => {
-    if (!active || !payload?.length) return null
-    const entry = payload[0]?.payload as { name: string; downloads: number; cumulative: number }
-    if (!entry) return null
-    return (
-      <div className="rounded-md border border-border bg-white px-3 py-2 text-xs shadow-lg">
-        <div className="mb-2 text-[11px] uppercase tracking-wide text-neutral-500">{entry.name}</div>
-        <div className="flex flex-col gap-1">
-          <div className="flex items-center justify-between gap-4">
-            <span className="text-neutral-700">Downloads</span>
-            <span className="font-semibold text-black">{formatNumber(entry.downloads)}</span>
-          </div>
-          <div className="flex items-center justify-between gap-4">
-            <span className="text-neutral-700">Cumulative share</span>
-            <span className="font-semibold text-black">{formatPercentage(entry.cumulative / 100)}</span>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  const churnTooltip = ({ active, payload }: TooltipProps<number, string>) => {
-    if (!active || !payload?.length) return null
-    const entry = payload[0]?.payload as { name: string; added: number; removed: number }
-    if (!entry) return null
-    return (
-      <div className="rounded-md border border-border bg-white px-3 py-2 text-xs shadow-lg">
-        <div className="mb-2 text-[11px] uppercase tracking-wide text-neutral-500">{entry.name}</div>
-        <div className="flex flex-col gap-1">
-          <div className="flex items-center justify-between gap-4">
-            <span className="text-neutral-700">Added</span>
-            <span className="font-semibold text-black">{formatNumber(entry.added)}</span>
-          </div>
-          <div className="flex items-center justify-between gap-4">
-            <span className="text-neutral-700">Removed</span>
-            <span className="font-semibold text-black">{formatNumber(Math.abs(entry.removed))}</span>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
     const parsed = parseRepoInput(input)
@@ -404,13 +352,21 @@ export default function App() {
                 <GitBranch className="h-5 w-5" />
               </div>
               <div>
-                <div className="text-xs uppercase tracking-[0.3em] text-neutral-500">Release Radar</div>
+                <div className="text-xs uppercase tracking-[0.3em] text-neutral-500">GRA Release Radar</div>
                 <div className="text-lg font-semibold">GitHub release insights</div>
               </div>
             </div>
-            <Badge variant="inverse">
-              {token ? 'Token enabled · local only' : 'Client-only · zero token'}
-            </Badge>
+            <div className="flex flex-wrap items-center justify-end gap-3">
+              <nav className="flex flex-wrap gap-3 text-xs text-neutral-500" aria-label="Developer resources">
+                <a className="underline underline-offset-4" href="/docs/">Docs</a>
+                <a className="underline underline-offset-4" href="/developers/">Developers</a>
+                <a className="underline underline-offset-4" href="/llms.txt">llms.txt</a>
+                <a className="underline underline-offset-4" href="/?mode=agent">Agent mode</a>
+              </nav>
+              <Badge variant="inverse">
+                {token ? 'Token enabled · local only' : 'Client-only · zero token'}
+              </Badge>
+            </div>
           </div>
 
           <div
@@ -502,25 +458,35 @@ export default function App() {
                         className="flex-1"
                         type={showToken ? 'text' : 'password'}
                         placeholder="ghp_... or github_pat_..."
-                        value={token}
+                        value={tokenInput}
                         autoComplete="off"
-                        onChange={(event) => setToken(event.target.value)}
+                        onChange={(event) => setTokenInput(event.target.value)}
                       />
                       <Button
                         type="button"
                         variant="secondary"
                         size="sm"
+                        disabled={!hasTokenInputChange}
+                        onClick={() => setToken(tokenInput.trim())}
+                      >
+                        Apply
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
                         onClick={() => setShowToken((prev) => !prev)}
                       >
                         {showToken ? 'Hide' : 'Show'}
                       </Button>
-                      {token ? (
+                      {token || tokenInput ? (
                         <Button
                           type="button"
                           variant="ghost"
                           size="sm"
                           onClick={() => {
                             setToken('')
+                            setTokenInput('')
                             setRememberToken(false)
                             setShowToken(false)
                           }}
@@ -582,7 +548,7 @@ export default function App() {
                     {notFound
                       ? 'Repository not found or private.'
                       : isRateLimited
-                        ? `GitHub API limit reached. Try again after ${formatResetTime(statusError.rateLimit)} or add a token above.`
+                        ? rateLimitMessage
                         : authError
                           ? token
                             ? 'Token is invalid or missing access to this repository.'
@@ -873,7 +839,7 @@ export default function App() {
                               tick={{ fontSize: 11 }}
                             />
                             <ZAxis type="number" dataKey="downloads" range={[60, 240]} name="Downloads" />
-                            <Tooltip content={scatterTooltip} />
+                            <Tooltip content={ScatterTooltip} />
                             <Scatter data={impactSpeedSeries} fill="hsl(var(--chart-1))" />
                           </ScatterChart>
                         </ResponsiveContainer>
@@ -908,7 +874,7 @@ export default function App() {
                               tickFormatter={(value) => `${value}%`}
                               tick={{ fontSize: 11 }}
                             />
-                            <Tooltip content={paretoTooltip} />
+                            <Tooltip content={ParetoTooltip} />
                             <Bar yAxisId="left" dataKey="downloads" name="Downloads" fill="hsl(var(--chart-3))" />
                             <Line
                               yAxisId="right"
@@ -1020,7 +986,7 @@ export default function App() {
                             <CartesianGrid strokeDasharray="4 4" stroke="rgba(0,0,0,0.08)" />
                             <XAxis dataKey="name" tick={false} />
                             <YAxis tick={{ fontSize: 11 }} />
-                            <Tooltip content={churnTooltip} />
+                            <Tooltip content={ChurnTooltip} />
                             <Bar dataKey="added" name="Added" fill="hsl(var(--chart-2))" radius={[4, 4, 0, 0]} />
                             <Bar dataKey="removed" name="Removed" fill="hsl(var(--chart-4))" radius={[0, 0, 4, 4]} />
                           </BarChart>
@@ -1502,6 +1468,16 @@ export default function App() {
                 <Download className="h-4 w-4" />
                 Data sourced from public GitHub REST endpoints. Source archives (zip/tar) are not counted by GitHub.
               </div>
+              <nav className="mt-4 flex flex-wrap gap-3" aria-label="Developer and agent resources">
+                {developerLinks.map((link) => (
+                  <a key={link.href} className="underline underline-offset-4" href={link.href}>
+                    {link.label}
+                  </a>
+                ))}
+                <a className="underline underline-offset-4" href="/?mode=agent">
+                  Agent mode
+                </a>
+              </nav>
             </footer>
           </div>
         )}

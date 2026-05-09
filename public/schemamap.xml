@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemamap xmlns="https://nlweb.ai/schemas/schemamap">
+  <schema>
+    <loc>https://gra.caldis.me/schema/software-application.jsonld</loc>
+    <type>SoftwareApplication</type>
+    <lastmod>2026-05-09</lastmod>
+  </schema>
+  <schema>
+    <loc>https://gra.caldis.me/openapi.json</loc>
+    <type>OpenAPI</type>
+    <lastmod>2026-05-09</lastmod>
+  </schema>
+</schemamap>

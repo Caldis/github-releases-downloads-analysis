@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GRA Release Radar privacy</title>
+    <meta name="description" content="Privacy notes for GRA Release Radar's client-only GitHub release analytics." />
+    <link rel="canonical" href="https://gra.caldis.me/privacy/" />
+  </head>
+  <body>
+    <main>
+      <h1>Privacy</h1>
+      <p>GRA Release Radar is designed as a client-only static web application. Repository input is processed in the browser. The app calls GitHub REST API endpoints directly from the user's device and does not send repository queries, release results, or optional GitHub tokens to a first-party GRA backend.</p>
+      <p>If the user chooses to remember a GitHub token, the token is stored in localStorage on that device. If the user does not choose the remember option, the token is kept only in the current browser session state. Users should create fine-grained tokens with the smallest repository access they need, and should revoke tokens from GitHub if they suspect exposure.</p>
+      <p>The site is hosted as static files. Standard hosting and browser infrastructure may still process normal request metadata such as IP address, user agent, requested URL, and cache headers. GitHub receives API requests made by the user's browser and applies GitHub's own API limits and policies.</p>
+    </main>
+  </body>
+</html>

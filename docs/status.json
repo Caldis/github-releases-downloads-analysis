@@ -1,0 +1,11 @@
+{
+  "name": "GRA Release Radar",
+  "status": "static_client_available",
+  "updated": "2026-05-09",
+  "homepage": "https://gra.caldis.me/",
+  "notes": [
+    "The public site is a static client application.",
+    "GitHub API availability and rate limits depend on GitHub and the user's network or token.",
+    "No first-party hosted analysis API is currently operated."
+  ]
+}
