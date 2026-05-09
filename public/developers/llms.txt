@@ -3,10 +3,12 @@
 GRA Release Radar publishes static agent discovery files and markdown documentation.
 
 Important URLs:
-- /openapi.json documents static discovery resources.
-- /.well-known/agent.json describes capabilities.
-- /.well-known/agent-card.json describes A2A metadata.
-- /.well-known/mcp/server-card.json is a static MCP card and explicitly states no live MCP transport is operated.
-- /status.json describes the static client architecture.
+- [OpenAPI](https://gra.caldis.me/openapi.json) documents static discovery resources.
+- [API catalog](https://gra.caldis.me/.well-known/api-catalog) lists machine-readable descriptions.
+- [Agent JSON](https://gra.caldis.me/.well-known/agent.json) describes capabilities.
+- [Root agent JSON](https://gra.caldis.me/agent.json) is a fallback discovery path.
+- [A2A card](https://gra.caldis.me/.well-known/agent-card.json) describes A2A metadata.
+- [MCP server card](https://gra.caldis.me/.well-known/mcp/server-card.json) is a static MCP card and explicitly states no live MCP transport is operated.
+- [Status](https://gra.caldis.me/status.json) describes the static client architecture.
 
 Do not claim GRA has a hosted analysis API, streaming API, CLI, SDK, or live MCP tool endpoint.

@@ -1,0 +1,12 @@
+Use plain, direct engineering language.
+
+This is a static Vite and React application published from docs/.
+Author static discovery resources in public/ and run npm run build before publishing.
+
+Do not claim that GRA Release Radar has a hosted analysis API, live MCP transport, OAuth server, CLI, SDK, webhook endpoint, or streaming endpoint unless that capability exists in the repository and is deployed.
+
+Before shipping changes, run:
+
+- npm test
+- npm run typecheck
+- npm run build

@@ -1,0 +1,44 @@
+{
+  "agents": [
+    {
+      "schema_version": "1.0",
+      "name": "GRA Release Radar",
+      "description": "Client-only GitHub release analytics for maintainers and teams.",
+      "url": "https://gra.caldis.me/",
+      "version": "0.2.0",
+      "provider": {
+        "name": "Caldis",
+        "url": "https://github.com/Caldis"
+      },
+      "capabilities": [
+        "Analyze public GitHub release asset download counts",
+        "Summarize release cadence and monthly momentum",
+        "Break down release assets by operating system, architecture, and file type",
+        "Explain GitHub API rate limit behavior for the browser client"
+      ],
+      "entrypoints": {
+        "web": "https://gra.caldis.me/",
+        "agent": "https://gra.caldis.me/agent/",
+        "agent_mode": "https://gra.caldis.me/?mode=agent",
+        "llms": "https://gra.caldis.me/llms.txt",
+        "llms_full": "https://gra.caldis.me/llms-full.txt",
+        "openapi": "https://gra.caldis.me/openapi.json",
+        "api_catalog": "https://gra.caldis.me/.well-known/api-catalog",
+        "pricing": "https://gra.caldis.me/pricing.md",
+        "docs": "https://gra.caldis.me/docs/",
+        "developers": "https://gra.caldis.me/developers/"
+      },
+      "auth": {
+        "type": "optional_user_supplied_github_token",
+        "storage": "browser_local_storage_when_user_opts_in",
+        "recommended_permissions": ["Metadata read-only", "Contents read-only"]
+      },
+      "limitations": [
+        "No first-party hosted analysis API is currently operated.",
+        "No live MCP tool endpoint is currently operated.",
+        "GitHub API limits apply to the user's browser requests.",
+        "GitHub source archive downloads are not counted as release asset downloads."
+      ]
+    }
+  ]
+}

@@ -6,6 +6,9 @@
     <title>GRA Release Radar developer resources and agent docs</title>
     <meta name="description" content="Developer and AI agent resources for GRA Release Radar, including llms.txt, OpenAPI discovery, agent cards, MCP notes, and rate-limit guidance." />
     <link rel="canonical" href="https://gra.caldis.me/developers/" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" />
+    <link rel="service-desc" type="application/openapi+json" href="/openapi.json" />
+    <link rel="api-catalog" type="application/linkset+json" href="/.well-known/api-catalog" />
   </head>
   <body>
     <main>
@@ -17,12 +20,20 @@
         <tbody>
           <tr><td>llms.txt</td><td><a href="/llms.txt">/llms.txt</a></td><td>Compact AI-readable product summary.</td></tr>
           <tr><td>llms-full.txt</td><td><a href="/llms-full.txt">/llms-full.txt</a></td><td>Full AI-readable documentation in one request.</td></tr>
+          <tr><td>Static agent page</td><td><a href="/agent/">/agent/</a></td><td>Crawler-safe structured agent view.</td></tr>
           <tr><td>OpenAPI</td><td><a href="/openapi.json">/openapi.json</a></td><td>Static discovery and documentation resource schemas.</td></tr>
+          <tr><td>API catalog</td><td><a href="/.well-known/api-catalog">/.well-known/api-catalog</a></td><td>RFC 9727-style linkset pointing to the OpenAPI description.</td></tr>
           <tr><td>Agent JSON</td><td><a href="/.well-known/agent.json">/.well-known/agent.json</a></td><td>Agent capability description.</td></tr>
+          <tr><td>Root agent JSON</td><td><a href="/agent.json">/agent.json</a></td><td>Fallback agent discovery path.</td></tr>
           <tr><td>A2A card</td><td><a href="/.well-known/agent-card.json">/.well-known/agent-card.json</a></td><td>Agent-to-agent capability card.</td></tr>
           <tr><td>MCP card</td><td><a href="/.well-known/mcp/server-card.json">/.well-known/mcp/server-card.json</a></td><td>Static MCP discovery note.</td></tr>
+          <tr><td>OAuth metadata</td><td><a href="/.well-known/oauth-protected-resource">/.well-known/oauth-protected-resource</a></td><td>OAuth resource metadata noting that no GRA OAuth server is operated.</td></tr>
+          <tr><td>Web Bot Auth directory</td><td><a href="/.well-known/http-message-signatures-directory">/.well-known/http-message-signatures-directory</a></td><td>Signature policy metadata for crawlers.</td></tr>
           <tr><td>Pricing</td><td><a href="/pricing.md">/pricing.md</a></td><td>Machine-readable free pricing details.</td></tr>
           <tr><td>Status</td><td><a href="/status.json">/status.json</a></td><td>Static status and architecture notes.</td></tr>
+          <tr><td>Agent repo rules</td><td><a href="/AGENTS.md">/AGENTS.md</a></td><td>Instructions for coding agents working in the repository.</td></tr>
+          <tr><td>Agent skills index</td><td><a href="/.well-known/agent-skills/index.json">/.well-known/agent-skills/index.json</a></td><td>Agent Skills v0.2-style skill discovery index.</td></tr>
+          <tr><td>Error guide</td><td><a href="/errors.md">/errors.md</a></td><td>Structured guidance for GitHub API errors and retry behavior.</td></tr>
         </tbody>
       </table>
       <h2>Rate limits</h2>

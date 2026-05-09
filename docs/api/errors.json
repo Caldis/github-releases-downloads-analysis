@@ -1,0 +1,36 @@
+{
+  "product": "GRA Release Radar",
+  "updated": "2026-05-09",
+  "errors": [
+    {
+      "code": "github_primary_rate_limit",
+      "message": "GitHub returned a primary REST API rate-limit response.",
+      "hint": "Wait until the x-ratelimit-reset time or use a browser-supplied GitHub token with higher quota.",
+      "retryable": true
+    },
+    {
+      "code": "github_secondary_rate_limit",
+      "message": "GitHub returned a secondary rate-limit or abuse-detection response.",
+      "hint": "Slow down requests and wait for retry-after when GitHub supplies it.",
+      "retryable": true
+    },
+    {
+      "code": "github_not_found",
+      "message": "The repository was not found or cannot be read by the current token.",
+      "hint": "Check the owner/repository input. For private repositories, use a token that can read the repository.",
+      "retryable": false
+    },
+    {
+      "code": "github_bad_credentials",
+      "message": "GitHub rejected the supplied token.",
+      "hint": "Remove the token or use a valid fine-grained read-only token.",
+      "retryable": false
+    },
+    {
+      "code": "static_page_not_found",
+      "message": "GitHub Pages returned a static 404 page for an unknown GRA URL.",
+      "hint": "Use the sitemap, llms.txt, or developer docs to find supported static resources.",
+      "retryable": false
+    }
+  ]
+}

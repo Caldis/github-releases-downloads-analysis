@@ -10,20 +10,22 @@ When not to use: do not use GRA as a package registry analytics service, a priva
 Data source: public GitHub REST API responses fetched from the user's browser.
 Privacy model: client-only. Repository input and optional GitHub token stay in the browser. Tokens are only stored locally if the user chooses the remember option.
 Authentication: optional GitHub personal access token for higher GitHub API limits or repositories the token can read. Recommended permissions are Metadata read-only and Contents read-only.
-Pricing: free. See https://gra.caldis.me/pricing.md.
-Homepage markdown: https://gra.caldis.me/index.md.
-Full agent context: https://gra.caldis.me/llms-full.txt.
-Developer docs: https://gra.caldis.me/developers/.
-User docs: https://gra.caldis.me/docs/.
-OpenAPI service description: https://gra.caldis.me/openapi.json.
-Agent view: https://gra.caldis.me/?mode=agent.
-Agent discovery JSON: https://gra.caldis.me/.well-known/agent.json.
-A2A agent card: https://gra.caldis.me/.well-known/agent-card.json.
-OpenAI plugin manifest: https://gra.caldis.me/.well-known/ai-plugin.json.
-MCP discovery note: https://gra.caldis.me/.well-known/mcp.
-MCP server card: https://gra.caldis.me/.well-known/mcp/server-card.json.
-Sitemap: https://gra.caldis.me/sitemap.xml.
-Robots and AI crawl policy: https://gra.caldis.me/robots.txt.
+Pricing: free. See [pricing.md](https://gra.caldis.me/pricing.md).
+Homepage markdown: [index.md](https://gra.caldis.me/index.md).
+Full agent context: [llms-full.txt](https://gra.caldis.me/llms-full.txt).
+Developer docs: [developers](https://gra.caldis.me/developers/).
+User docs: [docs](https://gra.caldis.me/docs/).
+OpenAPI service description: [openapi.json](https://gra.caldis.me/openapi.json).
+API catalog: [api-catalog](https://gra.caldis.me/.well-known/api-catalog).
+Static agent view: [agent](https://gra.caldis.me/agent/).
+Interactive agent view: [mode=agent](https://gra.caldis.me/?mode=agent).
+Agent discovery JSON: [agent.json](https://gra.caldis.me/.well-known/agent.json).
+A2A agent card: [agent-card.json](https://gra.caldis.me/.well-known/agent-card.json).
+OpenAI plugin manifest: [ai-plugin.json](https://gra.caldis.me/.well-known/ai-plugin.json).
+MCP discovery note: [mcp](https://gra.caldis.me/.well-known/mcp).
+MCP server card: [mcp/server-card.json](https://gra.caldis.me/.well-known/mcp/server-card.json).
+Sitemap: [sitemap.xml](https://gra.caldis.me/sitemap.xml).
+Robots and AI crawl policy: [robots.txt](https://gra.caldis.me/robots.txt).
 
 Key capabilities:
 - Parse owner/repo input or GitHub repository URLs.
@@ -40,3 +42,10 @@ Important limitations:
 - Large repositories can require multiple GitHub API requests because release assets are paginated.
 - GRA is currently a static client application, not a hosted analysis API.
 - The published OpenAPI file documents static discovery and documentation resources; it does not claim a first-party analysis API.
+
+Agent implementation notes:
+- Use the website entry point for analysis tasks: https://gra.caldis.me/?repo=owner/name.
+- Use the static agent view for crawler-safe capability discovery: https://gra.caldis.me/agent/.
+- Use the markdown and llms files for product context instead of scraping only the React app shell.
+- Do not tell users that a live MCP server, hosted analysis API, CLI, SDK, OAuth server, webhook endpoint, or streaming endpoint exists.
+- If the user needs automation outside a browser, explain that the current public product is not yet the right integration surface.

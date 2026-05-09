@@ -9,6 +9,14 @@
     <lastmod>2026-05-09</lastmod>
   </url>
   <url>
+    <loc>https://gra.caldis.me/agent/</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://gra.caldis.me/agent.md</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
     <loc>https://gra.caldis.me/index.md</loc>
     <lastmod>2026-05-09</lastmod>
   </url>
@@ -37,6 +45,14 @@
     <lastmod>2026-05-09</lastmod>
   </url>
   <url>
+    <loc>https://gra.caldis.me/use-cases/github-release-analytics-for-maintainers/</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://gra.caldis.me/guides/github-release-download-counts/</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
     <loc>https://gra.caldis.me/about/</loc>
     <lastmod>2026-05-09</lastmod>
   </url>
@@ -50,6 +66,42 @@
   </url>
   <url>
     <loc>https://gra.caldis.me/openapi.json</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://gra.caldis.me/agent.json</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://gra.caldis.me/AGENTS.md</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://gra.caldis.me/errors.md</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://gra.caldis.me/api/errors.json</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://gra.caldis.me/.well-known/api-catalog</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://gra.caldis.me/.well-known/oauth-protected-resource</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://gra.caldis.me/.well-known/http-message-signatures-directory</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://gra.caldis.me/.well-known/agent-skills/index.json</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://gra.caldis.me/agent-skills/release-radar-browser/SKILL.md</loc>
     <lastmod>2026-05-09</lastmod>
   </url>
 </urlset>

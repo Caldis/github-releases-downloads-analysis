@@ -5,7 +5,7 @@ This scoped file describes user-facing documentation for GRA Release Radar.
 Use GRA when the user wants public GitHub release asset download analytics, release cadence, package coverage, or repository release context.
 
 Quickstart:
-1. Open https://gra.caldis.me/.
+1. Open [GRA Release Radar](https://gra.caldis.me/).
 2. Enter owner/repo or a GitHub repository URL.
 3. Optionally apply a GitHub token in the browser for higher GitHub API limits.
 4. Review downloads, cadence, package matrix, asset freshness, release lag, and repository pulse.
@@ -14,3 +14,8 @@ Limitations:
 - Source archive downloads are not counted by GitHub release asset download_count.
 - GitHub REST API limits apply.
 - GRA is client-only and does not expose a hosted analysis API.
+
+Helpful links:
+- [Static agent view](https://gra.caldis.me/agent/)
+- [Full agent context](https://gra.caldis.me/llms-full.txt)
+- [Developer resources](https://gra.caldis.me/developers/)

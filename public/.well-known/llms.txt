@@ -1,8 +1,10 @@
 # GRA Release Radar well-known llms.txt
 
-Canonical llms.txt: https://gra.caldis.me/llms.txt
-Full context: https://gra.caldis.me/llms-full.txt
-Agent view: https://gra.caldis.me/?mode=agent
-Developer docs: https://gra.caldis.me/developers/
-OpenAPI service description: https://gra.caldis.me/openapi.json
-MCP discovery note: https://gra.caldis.me/.well-known/mcp
+Canonical llms.txt: [llms.txt](https://gra.caldis.me/llms.txt)
+Full context: [llms-full.txt](https://gra.caldis.me/llms-full.txt)
+Static agent view: [agent](https://gra.caldis.me/agent/)
+Interactive agent view: [mode=agent](https://gra.caldis.me/?mode=agent)
+Developer docs: [developers](https://gra.caldis.me/developers/)
+OpenAPI service description: [openapi.json](https://gra.caldis.me/openapi.json)
+API catalog: [api-catalog](https://gra.caldis.me/.well-known/api-catalog)
+MCP discovery note: [mcp](https://gra.caldis.me/.well-known/mcp)

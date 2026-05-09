@@ -6,6 +6,9 @@
     <title>Compare GRA Release Radar with GitHub release pages and analytics tools</title>
     <meta name="description" content="Comparison notes for GRA Release Radar, GitHub release pages, hosted product analytics, and release management dashboards." />
     <link rel="canonical" href="https://gra.caldis.me/compare/" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" />
+    <link rel="service-desc" type="application/openapi+json" href="/openapi.json" />
+    <link rel="api-catalog" type="application/linkset+json" href="/.well-known/api-catalog" />
   </head>
   <body>
     <main>
@@ -17,6 +20,8 @@
       <p>Hosted analytics tools can provide long-term custom events, funnels, identities, and private dashboards. GRA does not collect product telemetry. It only analyzes public GitHub release metadata in the browser, which makes it simpler for open source release review but less powerful for private user behavior analysis.</p>
       <h2>Compared with release management tools</h2>
       <p>Release management platforms help plan, approve, deploy, and coordinate releases. GRA does not deploy software. It helps answer what happened after assets were published: which files were downloaded, which platforms dominate, and whether packaging changes correlate with adoption.</p>
+      <h2>Compared with registry analytics</h2>
+      <p>Registry analytics answer install or package pull questions for systems such as npm, PyPI, crates.io, RubyGems, Docker, and Homebrew. GRA answers a different question: how uploaded GitHub release assets perform. A project may need both views when it ships through registries and also attaches installers, binaries, checksums, or archives to GitHub releases.</p>
     </main>
   </body>
 </html>

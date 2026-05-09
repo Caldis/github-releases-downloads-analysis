@@ -2,8 +2,12 @@
   "openapi": "3.1.0",
   "info": {
     "title": "GRA Release Radar public discovery resources",
-    "version": "0.2.0",
-    "description": "Static documentation and discovery resources for GRA Release Radar. The current public product is a client-only browser app and does not expose a first-party analysis API."
+    "version": "0.3.0",
+    "description": "Static documentation and discovery resources for GRA Release Radar. The public product is a client-only browser app and does not expose a first-party hosted analysis API, OAuth server, streaming endpoint, SDK, CLI, webhook receiver, or live MCP tool transport.",
+    "license": {
+      "name": "Repository license",
+      "url": "https://github.com/Caldis/github-releases-downloads-analysis"
+    }
   },
   "servers": [
     {
@@ -11,18 +15,38 @@
       "description": "Static GitHub Pages site"
     }
   ],
+  "externalDocs": {
+    "description": "Developer and AI agent documentation",
+    "url": "https://gra.caldis.me/developers/"
+  },
+  "tags": [
+    {
+      "name": "Documentation",
+      "description": "Markdown and plain-text documentation resources."
+    },
+    {
+      "name": "Discovery",
+      "description": "Machine-readable discovery metadata for agents and API catalogs."
+    },
+    {
+      "name": "Status",
+      "description": "Static status and error-recovery notes."
+    }
+  ],
   "paths": {
     "/index.md": {
       "get": {
+        "tags": ["Documentation"],
         "operationId": "getMarkdownHomepage",
         "summary": "Get the markdown homepage",
+        "description": "Returns the canonical markdown fallback for agents that prefer markdown over HTML.",
         "responses": {
           "200": {
             "description": "Markdown homepage content",
             "content": {
               "text/markdown": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/MarkdownDocument"
                 }
               }
             }
@@ -32,15 +56,17 @@
     },
     "/llms.txt": {
       "get": {
+        "tags": ["Documentation"],
         "operationId": "getLlmsTxt",
         "summary": "Get compact agent instructions",
+        "description": "Returns the compact AI-readable product summary, limitations, and resource links.",
         "responses": {
           "200": {
             "description": "Plain-text agent overview",
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/TextDocument"
                 }
               }
             }
@@ -50,15 +76,17 @@
     },
     "/llms-full.txt": {
       "get": {
+        "tags": ["Documentation"],
         "operationId": "getFullAgentContext",
         "summary": "Get full product context for AI agents",
+        "description": "Returns the complete single-file documentation context for agent ingestion.",
         "responses": {
           "200": {
             "description": "Full plain-text product documentation",
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/TextDocument"
                 }
               }
             }
@@ -68,15 +96,97 @@
     },
     "/pricing.md": {
       "get": {
+        "tags": ["Documentation"],
         "operationId": "getPricingMarkdown",
         "summary": "Get machine-readable pricing",
+        "description": "Returns the current free pricing details and product limits.",
         "responses": {
           "200": {
             "description": "Markdown pricing table",
             "content": {
               "text/markdown": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/MarkdownDocument"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agent.md": {
+      "get": {
+        "tags": ["Documentation"],
+        "operationId": "getAgentMarkdown",
+        "summary": "Get markdown agent view",
+        "description": "Returns a markdown version of the crawler-safe agent view.",
+        "responses": {
+          "200": {
+            "description": "Markdown agent view",
+            "content": {
+              "text/markdown": {
+                "schema": {
+                  "$ref": "#/components/schemas/MarkdownDocument"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/AGENTS.md": {
+      "get": {
+        "tags": ["Documentation"],
+        "operationId": "getAgentRepositoryInstructions",
+        "summary": "Get coding-agent repository instructions",
+        "description": "Returns repository rules for AI coding agents.",
+        "responses": {
+          "200": {
+            "description": "Markdown agent instructions",
+            "content": {
+              "text/markdown": {
+                "schema": {
+                  "$ref": "#/components/schemas/MarkdownDocument"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/errors.md": {
+      "get": {
+        "tags": ["Status"],
+        "operationId": "getErrorRecoveryGuide",
+        "summary": "Get error and retry guidance",
+        "description": "Returns markdown guidance for GitHub rate limits, retry behavior, and static-site 404 behavior.",
+        "responses": {
+          "200": {
+            "description": "Markdown error recovery guide",
+            "content": {
+              "text/markdown": {
+                "schema": {
+                  "$ref": "#/components/schemas/MarkdownDocument"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/errors.json": {
+      "get": {
+        "tags": ["Status"],
+        "operationId": "getErrorCatalog",
+        "summary": "Get structured error catalog",
+        "description": "Returns structured notes for common GitHub API and static-site errors.",
+        "responses": {
+          "200": {
+            "description": "Structured error catalog",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorCatalog"
                 }
               }
             }
@@ -86,8 +196,10 @@
     },
     "/status.json": {
       "get": {
+        "tags": ["Status"],
         "operationId": "getStaticStatus",
         "summary": "Get static site status notes",
+        "description": "Returns static status metadata for the public product.",
         "responses": {
           "200": {
             "description": "Static status JSON",
@@ -101,12 +213,206 @@
           }
         }
       }
+    },
+    "/agent.json": {
+      "get": {
+        "tags": ["Discovery"],
+        "operationId": "getRootAgentDiscovery",
+        "summary": "Get root agent discovery JSON",
+        "description": "Returns the same agent discovery metadata as the well-known endpoint.",
+        "responses": {
+          "200": {
+            "description": "Agent discovery document",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentDiscovery"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/.well-known/agent-skills/index.json": {
+      "get": {
+        "tags": ["Discovery"],
+        "operationId": "getAgentSkillsIndex",
+        "summary": "Get Agent Skills discovery index",
+        "description": "Returns an Agent Skills v0.2-style index for the browser-use skill artifact.",
+        "responses": {
+          "200": {
+            "description": "Agent Skills index",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentSkillsIndex"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/.well-known/agent.json": {
+      "get": {
+        "tags": ["Discovery"],
+        "operationId": "getWellKnownAgentDiscovery",
+        "summary": "Get well-known agent discovery JSON",
+        "description": "Returns agent capability, entrypoint, authentication, and limitation metadata.",
+        "responses": {
+          "200": {
+            "description": "Agent discovery document",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentDiscovery"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/.well-known/agents.json": {
+      "get": {
+        "tags": ["Discovery"],
+        "operationId": "getWellKnownAgentsDiscovery",
+        "summary": "Get alternate agent discovery JSON",
+        "description": "Returns a list wrapper around the primary agent discovery document.",
+        "responses": {
+          "200": {
+            "description": "Agent discovery list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentDiscoveryList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/.well-known/agent-card.json": {
+      "get": {
+        "tags": ["Discovery"],
+        "operationId": "getA2AAgentCard",
+        "summary": "Get A2A agent card",
+        "description": "Returns the Agent-to-Agent style capability card for GRA Release Radar.",
+        "responses": {
+          "200": {
+            "description": "A2A agent card",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentCard"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/.well-known/mcp/server-card.json": {
+      "get": {
+        "tags": ["Discovery"],
+        "operationId": "getMcpServerCard",
+        "summary": "Get MCP server card",
+        "description": "Returns an honest MCP server card noting that no live tool transport is currently operated.",
+        "responses": {
+          "200": {
+            "description": "MCP server card",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/McpServerCard"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/.well-known/api-catalog": {
+      "get": {
+        "tags": ["Discovery"],
+        "operationId": "getApiCatalog",
+        "summary": "Get API catalog linkset",
+        "description": "Returns an RFC 9727-style linkset pointing agents to the OpenAPI description.",
+        "responses": {
+          "200": {
+            "description": "API catalog linkset",
+            "content": {
+              "application/linkset+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Linkset"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Linkset"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/.well-known/oauth-protected-resource": {
+      "get": {
+        "tags": ["Discovery"],
+        "operationId": "getOAuthProtectedResourceMetadata",
+        "summary": "Get OAuth protected resource metadata",
+        "description": "Returns OAuth protected-resource metadata. GRA does not currently operate a protected OAuth resource.",
+        "responses": {
+          "200": {
+            "description": "OAuth protected resource metadata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OAuthProtectedResourceMetadata"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/.well-known/http-message-signatures-directory": {
+      "get": {
+        "tags": ["Discovery"],
+        "operationId": "getHttpMessageSignaturesDirectory",
+        "summary": "Get Web Bot Auth signature policy",
+        "description": "Returns a static directory noting that signed HTTP messages are not required for public documentation resources.",
+        "responses": {
+          "200": {
+            "description": "HTTP Message Signatures directory",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpMessageSignaturesDirectory"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "TextDocument": {
+        "type": "string",
+        "description": "Plain text documentation."
+      },
+      "MarkdownDocument": {
+        "type": "string",
+        "description": "Markdown documentation beginning with a top-level heading."
+      },
       "StaticStatus": {
         "type": "object",
+        "additionalProperties": false,
         "properties": {
           "name": { "type": "string" },
           "status": { "type": "string" },
@@ -119,14 +425,171 @@
         },
         "required": ["name", "status", "updated", "homepage", "notes"]
       },
+      "AgentDiscovery": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "schema_version": { "type": "string" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "url": { "type": "string", "format": "uri" },
+          "version": { "type": "string" },
+          "provider": { "$ref": "#/components/schemas/Provider" },
+          "capabilities": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "entrypoints": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          },
+          "auth": { "type": "object" },
+          "limitations": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "required": ["schema_version", "name", "description", "url", "provider", "capabilities", "entrypoints", "auth", "limitations"]
+      },
+      "AgentDiscoveryList": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "agents": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/AgentDiscovery" }
+          }
+        },
+        "required": ["agents"]
+      },
+      "AgentSkillsIndex": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "$schema": { "type": "string", "format": "uri" },
+          "skills": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "name": { "type": "string" },
+                "description": { "type": "string" },
+                "type": { "type": "string" },
+                "url": { "type": "string", "format": "uri" },
+                "digest": { "type": "string" }
+              },
+              "required": ["name", "description", "type", "url", "digest"]
+            }
+          }
+        },
+        "required": ["$schema", "skills"]
+      },
+      "AgentCard": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "schemaVersion": { "type": "string" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "url": { "type": "string", "format": "uri" },
+          "version": { "type": "string" },
+          "skills": {
+            "type": "array",
+            "items": { "type": "object" }
+          }
+        },
+        "required": ["schemaVersion", "name", "description", "url", "version", "skills"]
+      },
+      "McpServerCard": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "version": { "type": "string" },
+          "status": { "type": "string" },
+          "serverUrl": {
+            "type": ["string", "null"],
+            "format": "uri"
+          },
+          "tools": {
+            "type": "array",
+            "items": { "type": "object" }
+          }
+        },
+        "required": ["name", "description", "version", "status", "serverUrl", "tools"]
+      },
+      "Provider": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string" },
+          "url": { "type": "string", "format": "uri" }
+        },
+        "required": ["name", "url"]
+      },
+      "Linkset": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "linkset": {
+            "type": "array",
+            "items": { "type": "object" }
+          }
+        },
+        "required": ["linkset"]
+      },
+      "OAuthProtectedResourceMetadata": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "resource": { "type": "string", "format": "uri" },
+          "resource_documentation": { "type": "string", "format": "uri" },
+          "authorization_servers": {
+            "type": "array",
+            "items": { "type": "string", "format": "uri" }
+          },
+          "scopes_supported": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "required": ["resource", "resource_documentation", "authorization_servers", "scopes_supported"]
+      },
+      "HttpMessageSignaturesDirectory": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "resource": { "type": "string", "format": "uri" },
+          "signature_required": { "type": "boolean" },
+          "documentation": { "type": "string", "format": "uri" }
+        },
+        "required": ["resource", "signature_required", "documentation"]
+      },
+      "ErrorCatalog": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "product": { "type": "string" },
+          "updated": { "type": "string", "format": "date" },
+          "errors": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Error" }
+          }
+        },
+        "required": ["product", "updated", "errors"]
+      },
       "Error": {
         "type": "object",
+        "additionalProperties": false,
         "properties": {
           "code": { "type": "string" },
           "message": { "type": "string" },
-          "hint": { "type": "string" }
+          "hint": { "type": "string" },
+          "retryable": { "type": "boolean" }
         },
-        "required": ["code", "message"]
+        "required": ["code", "message", "hint", "retryable"]
       }
     }
   }

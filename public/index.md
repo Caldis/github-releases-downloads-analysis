@@ -18,11 +18,21 @@ The product does not run a hosted analytics backend. Repository data comes from 
 ## Agent resources
 
 - Full context: /llms-full.txt
-- Agent view: /?mode=agent
+- Static agent view: /agent/
+- Interactive agent view: /?mode=agent
 - User docs: /docs/
 - Developer docs: /developers/
 - Pricing: /pricing.md
 - OpenAPI service description: /openapi.json
+- API catalog: /.well-known/api-catalog
 - Agent discovery: /.well-known/agent.json
 - A2A agent card: /.well-known/agent-card.json
 - MCP discovery note: /.well-known/mcp
+
+## Best fit
+
+GRA is a good fit when a maintainer wants a quick public report from GitHub release assets: download totals, monthly momentum, package matrix, platform split, architecture split, cadence, freshness, and anomaly checks. It is especially useful before changing release artifact names, dropping an architecture, writing a release retrospective, or comparing several public repositories.
+
+## Not a fit
+
+GRA is not a package registry analytics service, private product telemetry tool, hosted API, billing system, or compliance archive. It does not count GitHub source archive downloads because GitHub does not expose those values through release asset download counters.

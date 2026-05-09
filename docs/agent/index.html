@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GRA Release Radar agent view</title>
+    <meta name="description" content="Structured agent view for GRA Release Radar, a client-only GitHub release analytics tool." />
+    <link rel="canonical" href="https://gra.caldis.me/agent/" />
+    <link rel="alternate" type="text/markdown" href="/agent.md" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" />
+    <link rel="service-desc" type="application/openapi+json" href="/openapi.json" />
+    <link rel="api-catalog" type="application/linkset+json" href="/.well-known/api-catalog" />
+  </head>
+  <body>
+    <main>
+      <h1>GRA Release Radar agent view</h1>
+      <section>
+        <h2>Identity</h2>
+        <p>GRA Release Radar is a free, client-only GitHub release analytics tool for maintainers and teams. It analyzes public release asset downloads, release cadence, package coverage, platform adoption, and repository context from the user's browser.</p>
+      </section>
+      <section>
+        <h2>When to use</h2>
+        <ul>
+          <li>Use it for public GitHub release asset download analytics.</li>
+          <li>Use it for release cadence and monthly momentum review.</li>
+          <li>Use it for operating system, CPU architecture, and artifact type breakdowns.</li>
+          <li>Use it when a user wants a browser-only report and can provide a repository name or URL.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>When not to use</h2>
+        <ul>
+          <li>Do not use it as a hosted analysis API. No such API is currently operated.</li>
+          <li>Do not use it as a package registry analytics service for npm, PyPI, crates.io, or container pulls.</li>
+          <li>Do not claim it counts GitHub source archive downloads. GitHub does not expose those counts as release asset downloads.</li>
+          <li>Do not claim live MCP, SDK, CLI, OAuth, webhook, or streaming support.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Input and authentication</h2>
+        <p>Input is an owner/repo string or GitHub repository URL. Authentication is optional. Public repositories work without authentication until GitHub API limits are reached. A user can paste a GitHub personal access token in the browser for higher GitHub API quota or repository access allowed by that token.</p>
+      </section>
+      <section>
+        <h2>Capabilities</h2>
+        <ul>
+          <li>Fetch up to 1,000 GitHub releases and their assets.</li>
+          <li>Calculate total downloads, asset count, release count, shipped asset size, and median release cadence.</li>
+          <li>Group downloads by release, month, semver class, operating system, architecture, and file type.</li>
+          <li>Show release lag, asset freshness, adoption buckets, churn, Pareto concentration, and anomaly signals.</li>
+          <li>Show repository stars, forks, open issues, watchers, languages, contributors, and commit activity when GitHub returns them.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Discovery resources</h2>
+        <table>
+          <thead><tr><th>Resource</th><th>URL</th></tr></thead>
+          <tbody>
+            <tr><td>Web app</td><td><a href="/">/</a></td></tr>
+            <tr><td>Markdown agent view</td><td><a href="/agent.md">/agent.md</a></td></tr>
+            <tr><td>llms.txt</td><td><a href="/llms.txt">/llms.txt</a></td></tr>
+            <tr><td>Full agent context</td><td><a href="/llms-full.txt">/llms-full.txt</a></td></tr>
+            <tr><td>Developer docs</td><td><a href="/developers/">/developers/</a></td></tr>
+            <tr><td>Pricing</td><td><a href="/pricing.md">/pricing.md</a></td></tr>
+            <tr><td>OpenAPI</td><td><a href="/openapi.json">/openapi.json</a></td></tr>
+            <tr><td>API catalog</td><td><a href="/.well-known/api-catalog">/.well-known/api-catalog</a></td></tr>
+            <tr><td>Agent discovery JSON</td><td><a href="/.well-known/agent.json">/.well-known/agent.json</a></td></tr>
+            <tr><td>A2A agent card</td><td><a href="/.well-known/agent-card.json">/.well-known/agent-card.json</a></td></tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GitHub release analytics for maintainers - GRA Release Radar</title>
+    <meta name="description" content="Use GRA Release Radar to review GitHub release downloads, cadence, platform adoption, and package coverage for public repositories." />
+    <link rel="canonical" href="https://gra.caldis.me/use-cases/github-release-analytics-for-maintainers/" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" />
+    <link rel="service-desc" type="application/openapi+json" href="/openapi.json" />
+  </head>
+  <body>
+    <main>
+      <h1>GitHub release analytics for project maintainers</h1>
+      <p>Maintainers often need to understand how public release assets are used, but GitHub release pages show raw asset counters without a broader report. GRA Release Radar reads public GitHub release data in the browser and summarizes download totals, release cadence, package coverage, and platform adoption.</p>
+      <h2>Questions this use case answers</h2>
+      <ul>
+        <li>Which release assets receive most downloads?</li>
+        <li>Are Windows, macOS, Linux, ARM, x64, zip, tar.gz, deb, rpm, dmg, exe, and checksum assets represented consistently?</li>
+        <li>Did a recent release change download behavior?</li>
+        <li>Are prereleases hiding or distorting stable release trends?</li>
+        <li>Are downloads concentrated in a few assets or spread across the package matrix?</li>
+      </ul>
+      <h2>How to start</h2>
+      <p>Open <a href="/">GRA Release Radar</a> and enter a public repository such as <code>vercel/next.js</code> or <code>tauri-apps/tauri</code>. If GitHub rate limits the browser session, wait for the reset time or apply a read-only GitHub token in the browser.</p>
+      <h2>Important limits</h2>
+      <p>GRA does not count GitHub source archive downloads because GitHub does not expose those values through release asset download counters. It does not operate a hosted analysis API or private telemetry backend.</p>
+    </main>
+  </body>
+</html>

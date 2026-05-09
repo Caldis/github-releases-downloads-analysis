@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>How GitHub release download counts work - GRA Release Radar</title>
+    <meta name="description" content="A practical guide to GitHub release asset download counts, source archive limits, rate limits, and how GRA Release Radar reads public release data." />
+    <link rel="canonical" href="https://gra.caldis.me/guides/github-release-download-counts/" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" />
+    <link rel="service-desc" type="application/openapi+json" href="/openapi.json" />
+  </head>
+  <body>
+    <main>
+      <h1>How GitHub release download counts work</h1>
+      <p>GitHub exposes a <code>download_count</code> value for uploaded release assets. GRA Release Radar uses those public asset counters to build maintainer-facing reports. The data is useful for understanding installer, binary, checksum, archive, and package adoption across public releases.</p>
+      <h2>What is counted</h2>
+      <p>Uploaded release assets are counted by GitHub as release assets. Examples include installers, binaries, archives, checksums, package bundles, and platform-specific artifacts attached to a GitHub release.</p>
+      <h2>What is not counted</h2>
+      <p>GitHub source archive zip and tarball downloads are not exposed through release asset counters. GRA does not estimate or invent those values.</p>
+      <h2>Rate limits</h2>
+      <p>GRA runs in the browser, so unauthenticated GitHub API calls share the user's network quota. A user-supplied GitHub token can raise the quota, but GitHub primary and secondary limits still apply. Agents should read <a href="/errors.md">the error guide</a> before retrying.</p>
+      <h2>Using the report</h2>
+      <p>Use the platform, architecture, file type, cadence, and anomaly views to decide whether package names are clear, whether older platforms are still used, and whether a release created unusual demand.</p>
+    </main>
+  </body>
+</html>

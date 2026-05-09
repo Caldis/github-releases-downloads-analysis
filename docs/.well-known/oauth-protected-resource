@@ -1,0 +1,12 @@
+{
+  "resource": "https://gra.caldis.me/",
+  "resource_documentation": "https://gra.caldis.me/developers/",
+  "authorization_servers": [],
+  "scopes_supported": [],
+  "bearer_methods_supported": [],
+  "notes": [
+    "GRA Release Radar does not currently operate an OAuth-protected first-party API.",
+    "The browser app can optionally use a GitHub personal access token supplied by the user directly in the browser.",
+    "This metadata file exists so agents can discover that there is no GRA OAuth server to call."
+  ]
+}

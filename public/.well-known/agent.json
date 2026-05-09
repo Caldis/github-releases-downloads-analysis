@@ -3,6 +3,7 @@
   "name": "GRA Release Radar",
   "description": "Client-only GitHub release analytics for maintainers and teams.",
   "url": "https://gra.caldis.me/",
+  "version": "0.2.0",
   "provider": {
     "name": "Caldis",
     "url": "https://github.com/Caldis"
@@ -15,10 +16,12 @@
   ],
   "entrypoints": {
     "web": "https://gra.caldis.me/",
+    "agent": "https://gra.caldis.me/agent/",
     "agent_mode": "https://gra.caldis.me/?mode=agent",
     "llms": "https://gra.caldis.me/llms.txt",
     "llms_full": "https://gra.caldis.me/llms-full.txt",
     "openapi": "https://gra.caldis.me/openapi.json",
+    "api_catalog": "https://gra.caldis.me/.well-known/api-catalog",
     "pricing": "https://gra.caldis.me/pricing.md",
     "docs": "https://gra.caldis.me/docs/",
     "developers": "https://gra.caldis.me/developers/"

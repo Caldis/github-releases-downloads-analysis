@@ -15,6 +15,7 @@
     <link rel="alternate" type="text/plain" href="./llms.txt" title="llms.txt" />
     <link rel="alternate" type="text/plain" href="./llms-full.txt" title="llms-full.txt" />
     <link rel="service-desc" type="application/openapi+json" href="./openapi.json" />
+    <link rel="api-catalog" type="application/linkset+json" href="./.well-known/api-catalog" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="GRA Release Radar - GitHub release analytics for maintainers" />
     <meta
@@ -93,6 +94,26 @@
             ]
           },
           {
+            "@type": "Service",
+            "@id": "https://gra.caldis.me/#service",
+            "name": "GRA Release Radar GitHub release analytics",
+            "serviceType": "Public GitHub release asset analytics",
+            "provider": {
+              "@id": "https://gra.caldis.me/#organization"
+            },
+            "areaServed": "Worldwide",
+            "audience": {
+              "@type": "Audience",
+              "audienceType": "Open source maintainers, release engineers, developer relations teams, and project evaluators"
+            },
+            "availableChannel": {
+              "@type": "ServiceChannel",
+              "serviceUrl": "https://gra.caldis.me/"
+            },
+            "termsOfService": "https://gra.caldis.me/privacy/",
+            "description": "A free browser-only service for reviewing public GitHub release asset download counts, release cadence, package coverage, and adoption signals."
+          },
+          {
             "@type": "FAQPage",
             "@id": "https://gra.caldis.me/#faq",
             "mainEntity": [
@@ -156,8 +177,8 @@
         ]
       }
     </script>
-    <script type="module" crossorigin src="./assets/index-BUPoz82T.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-DtPqaLkp.css">
+    <script type="module" crossorigin src="./assets/index-obWLSJxt.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BNScrqRH.css">
   </head>
   <body>
     <div id="root">
@@ -183,6 +204,38 @@
             </ul>
           </section>
           <section>
+            <h2>What GRA helps maintainers answer</h2>
+            <p>
+              GRA helps answer practical release questions that GitHub does not summarize on one page:
+              which release assets get most downloads, whether downloads are concentrated in a few files,
+              how often the project publishes, which operating systems or CPU architectures are represented,
+              whether prereleases distort the picture, and whether recent releases have complete artifact
+              coverage. These answers are useful before changing a packaging matrix, writing a release
+              retrospective, planning a launch, or comparing public adoption signals across open source
+              projects.
+            </p>
+          </section>
+          <section>
+            <h2>Quickstart</h2>
+            <ol>
+              <li>Open <a href="https://gra.caldis.me/">https://gra.caldis.me/</a>.</li>
+              <li>Enter a public repository such as <code>vercel/next.js</code> or paste a GitHub repository URL.</li>
+              <li>Review total asset downloads, release cadence, platform breakdowns, package coverage, and anomaly tables.</li>
+              <li>If GitHub rate limits the browser request, wait for the reset time or apply a read-only GitHub token in the browser.</li>
+            </ol>
+          </section>
+          <section>
+            <h2>Positioning</h2>
+            <p>
+              GRA is intentionally narrower than a full release management platform. GitHub Releases stores
+              release assets and raw download counts, while GRA turns those public counts into maintainer
+              reports. Product analytics suites measure private application usage, while GRA only reads public
+              GitHub release metadata. Registry dashboards focus on npm, PyPI, crates.io, or container pulls,
+              while GRA focuses on GitHub release assets such as installers, archives, checksums, binaries, and
+              package bundles. See the <a href="/compare/">comparison page</a> for a more detailed breakdown.
+            </p>
+          </section>
+          <section>
             <h2>How agents should use GRA</h2>
             <p>
               Use GRA when a user asks for GitHub release download analytics, package adoption analysis,
@@ -196,7 +249,8 @@
                 <tr><th>Resource</th><th>URL</th></tr>
               </thead>
               <tbody>
-                <tr><td>Agent view</td><td><a href="/?mode=agent">/?mode=agent</a></td></tr>
+                <tr><td>Static agent view</td><td><a href="/agent/">/agent/</a></td></tr>
+                <tr><td>Interactive agent view</td><td><a href="/?mode=agent">/?mode=agent</a></td></tr>
                 <tr><td>llms.txt</td><td><a href="/llms.txt">/llms.txt</a></td></tr>
                 <tr><td>Full context</td><td><a href="/llms-full.txt">/llms-full.txt</a></td></tr>
                 <tr><td>Markdown homepage</td><td><a href="/index.md">/index.md</a></td></tr>
@@ -205,6 +259,29 @@
                 <tr><td>OpenAPI description</td><td><a href="/openapi.json">/openapi.json</a></td></tr>
               </tbody>
             </table>
+          </section>
+          <section>
+            <h2>Trust, privacy, and rate limits</h2>
+            <p>
+              GRA is published as a static GitHub Pages site from the public repository at
+              <a href="https://github.com/Caldis/github-releases-downloads-analysis">github.com/Caldis/github-releases-downloads-analysis</a>.
+              The analyzer runs in the user's browser. Repository names and optional GitHub tokens are not
+              sent to a GRA server because no GRA server is operated for analysis. GitHub API limits still
+              apply because the browser calls GitHub directly. Unauthenticated calls share the user's network
+              quota, while authenticated calls use the user's GitHub account quota and can still hit secondary
+              limits if requests are too frequent.
+            </p>
+          </section>
+          <section>
+            <h2>Common questions</h2>
+            <dl>
+              <dt>Does GRA count source archive downloads?</dt>
+              <dd>No. GitHub does not expose source archive zip and tarball downloads as release asset download counts.</dd>
+              <dt>Does GRA have paid plans?</dt>
+              <dd>No. The public product is free and has no hosted billing account, subscription, or usage-based plan.</dd>
+              <dt>Does GRA expose a hosted analysis API?</dt>
+              <dd>No. The published OpenAPI file describes static discovery resources, not a first-party analysis endpoint.</dd>
+            </dl>
           </section>
         </article>
       </main>

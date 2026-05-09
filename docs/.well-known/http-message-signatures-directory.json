@@ -1,0 +1,16 @@
+{
+  "resource": "https://gra.caldis.me/",
+  "signature_required": false,
+  "documentation": "https://gra.caldis.me/developers/",
+  "public_resources": [
+    "https://gra.caldis.me/",
+    "https://gra.caldis.me/llms.txt",
+    "https://gra.caldis.me/llms-full.txt",
+    "https://gra.caldis.me/openapi.json",
+    "https://gra.caldis.me/.well-known/agent.json"
+  ],
+  "notes": [
+    "Public documentation and discovery files do not require HTTP Message Signatures.",
+    "GRA Release Radar does not currently operate a protected first-party analysis API."
+  ]
+}

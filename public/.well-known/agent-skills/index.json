@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "release-radar-browser",
+      "description": "Use GRA Release Radar to inspect public GitHub release downloads in a browser-only workflow.",
+      "type": "skill-md",
+      "url": "https://gra.caldis.me/agent-skills/release-radar-browser/SKILL.md",
+      "digest": "sha256:9e93dd370c77e8f02d8cfd7b2caddaca9ae3799dd1bad4f98f3da3ecea29783f"
+    }
+  ]
+}

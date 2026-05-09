@@ -1,0 +1,22 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://gra.caldis.me/.well-known/api-catalog",
+      "item": [
+        {
+          "href": "https://gra.caldis.me/openapi.json",
+          "type": "application/openapi+json",
+          "profile": "https://www.rfc-editor.org/info/rfc9727",
+          "title": "GRA Release Radar public discovery OpenAPI description"
+        }
+      ],
+      "describedby": [
+        {
+          "href": "https://gra.caldis.me/developers/",
+          "type": "text/html",
+          "title": "GRA Release Radar developer resources"
+        }
+      ]
+    }
+  ]
+}

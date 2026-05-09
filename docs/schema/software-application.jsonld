@@ -24,5 +24,15 @@
   "sameAs": [
     "https://github.com/Caldis/github-releases-downloads-analysis",
     "https://gra.caldis.me/llms.txt"
-  ]
+  ],
+  "provider": {
+    "@type": "Organization",
+    "name": "Caldis",
+    "url": "https://github.com/Caldis"
+  },
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "Open source maintainers, release engineers, developer relations teams, and project evaluators"
+  },
+  "dateModified": "2026-05-09"
 }
