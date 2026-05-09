@@ -571,7 +571,7 @@ function ReleaseRadarApp({ initialRepo }: { initialRepo: string }) {
           </div>
 
           {isEmptyState ? (
-            <section className="space-y-8" aria-labelledby="homepage-context-title">
+            <section className="sr-only" aria-labelledby="homepage-context-title" data-agent-context="homepage">
               <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
                 <div className="space-y-4">
                   <h2 id="homepage-context-title" className="text-2xl font-semibold tracking-tight">
@@ -603,13 +603,13 @@ function ReleaseRadarApp({ initialRepo }: { initialRepo: string }) {
                     GitHub does not expose those values as release asset download counts.
                   </p>
                   <div className="flex flex-wrap gap-2 text-xs">
-                    <a className="rounded-full border border-border px-3 py-1 underline underline-offset-4" href="/pricing.md">
+                    <a className="rounded-full border border-border px-3 py-1 underline underline-offset-4" href="/pricing.md" tabIndex={-1}>
                       Pricing
                     </a>
-                    <a className="rounded-full border border-border px-3 py-1 underline underline-offset-4" href="/privacy/">
+                    <a className="rounded-full border border-border px-3 py-1 underline underline-offset-4" href="/privacy/" tabIndex={-1}>
                       Privacy
                     </a>
-                    <a className="rounded-full border border-border px-3 py-1 underline underline-offset-4" href="/errors.md">
+                    <a className="rounded-full border border-border px-3 py-1 underline underline-offset-4" href="/errors.md" tabIndex={-1}>
                       Rate-limit guide
                     </a>
                   </div>
@@ -642,6 +642,7 @@ function ReleaseRadarApp({ initialRepo }: { initialRepo: string }) {
                         key={link.href}
                         className="rounded-md border border-border px-3 py-2 underline underline-offset-4"
                         href={link.href}
+                        tabIndex={-1}
                       >
                         {link.label}
                       </a>
