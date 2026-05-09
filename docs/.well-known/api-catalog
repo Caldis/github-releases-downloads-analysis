@@ -8,6 +8,21 @@
           "type": "application/openapi+json",
           "profile": "https://www.rfc-editor.org/info/rfc9727",
           "title": "GRA Release Radar public discovery OpenAPI description"
+        },
+        {
+          "href": "https://gra.caldis.me/.well-known/agent.json",
+          "type": "application/json",
+          "title": "GRA Release Radar agent discovery document"
+        },
+        {
+          "href": "https://gra.caldis.me/llms.txt",
+          "type": "text/plain",
+          "title": "GRA Release Radar compact agent instructions"
+        },
+        {
+          "href": "https://gra.caldis.me/auth.md",
+          "type": "text/markdown",
+          "title": "GRA Release Radar authentication guide"
         }
       ],
       "describedby": [

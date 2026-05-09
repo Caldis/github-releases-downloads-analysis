@@ -114,6 +114,26 @@
         }
       }
     },
+    "/auth.md": {
+      "get": {
+        "tags": ["Documentation"],
+        "operationId": "getAuthMarkdown",
+        "summary": "Get authentication guidance",
+        "description": "Returns markdown guidance for optional browser-supplied GitHub tokens and current no-OAuth limitations.",
+        "responses": {
+          "200": {
+            "description": "Markdown authentication guide",
+            "content": {
+              "text/markdown": {
+                "schema": {
+                  "$ref": "#/components/schemas/MarkdownDocument"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/agent.md": {
       "get": {
         "tags": ["Documentation"],

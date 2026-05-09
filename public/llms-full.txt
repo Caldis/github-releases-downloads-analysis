@@ -61,6 +61,7 @@ GRA is free. There is no hosted paid plan, user account, subscription, or usage-
 - Use case page: https://gra.caldis.me/use-cases/github-release-analytics-for-maintainers/
 - Guide: https://gra.caldis.me/guides/github-release-download-counts/
 - Pricing: https://gra.caldis.me/pricing.md
+- Auth guide: https://gra.caldis.me/auth.md
 - Static agent view: https://gra.caldis.me/agent/
 - Interactive agent mode: https://gra.caldis.me/?mode=agent
 - llms.txt: https://gra.caldis.me/llms.txt

@@ -1,6 +1,7 @@
 {
   "resource": "https://gra.caldis.me/",
   "signature_required": false,
+  "keys": [],
   "documentation": "https://gra.caldis.me/developers/",
   "public_resources": [
     "https://gra.caldis.me/",

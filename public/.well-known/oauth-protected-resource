@@ -1,6 +1,6 @@
 {
   "resource": "https://gra.caldis.me/",
-  "resource_documentation": "https://gra.caldis.me/developers/",
+  "resource_documentation": "https://gra.caldis.me/auth.md",
   "authorization_servers": [],
   "scopes_supported": [],
   "bearer_methods_supported": [],

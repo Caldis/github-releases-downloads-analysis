@@ -10,6 +10,7 @@ When not to use: do not use GRA as a package registry analytics service, a priva
 Data source: public GitHub REST API responses fetched from the user's browser.
 Privacy model: client-only. Repository input and optional GitHub token stay in the browser. Tokens are only stored locally if the user chooses the remember option.
 Authentication: optional GitHub personal access token for higher GitHub API limits or repositories the token can read. Recommended permissions are Metadata read-only and Contents read-only.
+Auth guide: [auth.md](https://gra.caldis.me/auth.md).
 Pricing: free. See [pricing.md](https://gra.caldis.me/pricing.md).
 Homepage markdown: [index.md](https://gra.caldis.me/index.md).
 Full agent context: [llms-full.txt](https://gra.caldis.me/llms-full.txt).
@@ -49,3 +50,11 @@ Agent implementation notes:
 - Use the markdown and llms files for product context instead of scraping only the React app shell.
 - Do not tell users that a live MCP server, hosted analysis API, CLI, SDK, OAuth server, webhook endpoint, or streaming endpoint exists.
 - If the user needs automation outside a browser, explain that the current public product is not yet the right integration surface.
+
+When to use:
+- Use GRA for public GitHub release asset download analysis.
+- Use GRA for release cadence, package coverage, platform adoption, architecture adoption, and maintainer reporting.
+- Use GRA when the user can provide a repository name or GitHub repository URL.
+
+When not to use:
+- Do not use GRA for private telemetry, package registry install counts, source archive download counts, or server-side automation.
